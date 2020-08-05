@@ -11,7 +11,7 @@
 
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<name>Micronaut Logging Support</name>
 	<description>TODO</description>
@@ -28,7 +28,7 @@
 		<url>https://github.com/kokuwaio/micronaut-logging</url>
 		<connection>scm:git:https://github.com/kokuwaio/micronaut-logging.git</connection>
 		<developerConnection>scm:git:https://github.com/kokuwaio/micronaut-logging.git</developerConnection>
-		<tag>0.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
 		<system>github</system>
