@@ -1,0 +1,26 @@
+logger:
+  mdc:
+    key1:
+      key: key
+      level: DEBUG
+      loggers:
+      - io.kiwios.a
+      - io.kiwios.b
+      values:
+      - value-1
+      - value-2
+    key2:
+      key: key
+      level: TRACE
+      loggers:
+      - io.kiwios.b
+      - io.kiwios.c
+      values:
+      - value-2
+    key:
+      level: TRACE
+      loggers:
+      - io.kiwios
+      values:
+      - value-3
+    user: {}
