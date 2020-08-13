@@ -1,0 +1,26 @@
+logger:
+  mdc:
+    key1:
+      key: key
+      level: DEBUG
+      loggers:
+      - io.kokuwa.a
+      - io.kokuwa.b
+      values:
+      - value-1
+      - value-2
+    key2:
+      key: key
+      level: TRACE
+      loggers:
+      - io.kokuwa.b
+      - io.kokuwa.c
+      values:
+      - value-2
+    key:
+      level: TRACE
+      loggers:
+      - io.kokuwa
+      values:
+      - value-3
+    user: {}
