@@ -64,6 +64,44 @@ logger:
     user: {}
 ```
 
+### Set log level based on HTTP request header
+
+Confguration:
+ * *enabled*: enable HTTP request filter (`true` is default)
+ * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (highest is default)
+ * *pattern*: filter pattern (`/**` is default)
+ * *header*: name of HTTP header (`x-log-level` is default)
+
+Example with default configuration:
+```
+logger:
+  request:
+    header:
+      enabled: true
+      order: -2147483648
+      pattern: /**
+      header: x-log-level
+```
+
+### Add princial for request to MDC
+
+Confguration:
+ * *enabled*: enable HTTP principal filter (`true` is default)
+ * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) ([ServerFilterPhase.SECURITY.after()](https://github.com/micronaut-projects/micronaut-core/blob/v2.0.1/http/src/main/java/io/micronaut/http/filter/ServerFilterPhase.java#L54) is default)
+ * *pattern*: filter pattern (`/**` is default)
+ * *key*: name of MDC header (`principal` is default)
+
+Example with default configuration:
+```
+logger:
+  request:
+    principal:
+      enabled: true
+      order: 39250
+      pattern: /**
+      key: principal
+```
+
 ## Build & Release
 
 ### Dependency updates
@@ -88,3 +126,6 @@ mvn release:prepare release:perform release:clean -B
 ## Open Topics
 
  * configure mdc on refresh event
+ * add stackdriver per configuration
+ * add fluent per configuration
+ * read **serviceName** and **serviceVersion** from yaml

@@ -1,0 +1,16 @@
+micronaut:
+  security:
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
+              jws-algorithm: HS256
+  http:
+    client:
+      logger-name: io.kokuwa.Test
+
+logger:
+  levels:
+    io.kokuwa.Test: TRACE
