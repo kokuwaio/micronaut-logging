@@ -64,6 +64,15 @@ logger:
     user: {}
 ```
 
+
+### Set log level based on HTTP request header
+
+Confguration:
+ * *enabled*: enable HTTP request filter (`true` is default)
+ * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (highest is default)
+ * *pattern*: filter pattern (`/**` is default)
+ * *header*: name of HTTP header (`x-log-level` is default)
+
 ## Build & Release
 
 ### Dependency updates
