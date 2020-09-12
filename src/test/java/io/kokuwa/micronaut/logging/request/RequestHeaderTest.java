@@ -9,7 +9,7 @@ import ch.qos.logback.classic.Level;
 import io.kokuwa.micronaut.logging.AbstractTest;
 
 /**
- * Test for {@link HeaderLoggingHttpFilter}.
+ * Test for {@link HeaderLoggingServerHttpFilter}.
  *
  * @author Stephan Schnabel
  */

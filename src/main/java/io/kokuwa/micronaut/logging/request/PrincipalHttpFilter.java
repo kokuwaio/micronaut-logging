@@ -7,6 +7,8 @@ import org.slf4j.MDC;
 
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.annotation.Value;
+import io.micronaut.core.async.publisher.Publishers;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Filter;
@@ -21,15 +23,13 @@ import io.micronaut.runtime.server.EmbeddedServer;
  * @author Stephan Schnabel
  */
 @Requires(beans = EmbeddedServer.class)
-@Requires(property = PrincipalHttpFilter.ENABLED, notEquals = "false")
-@Filter("${" + PrincipalHttpFilter.PREFIX + ".pattern:" + PrincipalHttpFilter.DEFAULT_PATTERN + ":/**}")
+@Requires(property = PrincipalHttpFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
+@Filter("${" + PrincipalHttpFilter.PREFIX + ".path:/**}")
 public class PrincipalHttpFilter implements HttpServerFilter {
 
 	public static final String PREFIX = "logger.request.principal";
-	public static final String ENABLED = PREFIX + ".enabled";
 
 	public static final String DEFAULT_KEY = "principal";
-	public static final String DEFAULT_PATTERN = "/**";
 	public static final int DEFAULT_ORDER = ServerFilterPhase.SECURITY.after();
 
 	private final String key;
@@ -49,7 +49,15 @@ public class PrincipalHttpFilter implements HttpServerFilter {
 
 	@Override
 	public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
-		request.getUserPrincipal().ifPresent(princial -> MDC.put(key, princial.getName()));
-		return chain.proceed(request);
+		var princial = request.getUserPrincipal();
+		if (princial.isPresent()) {
+			MDC.put(key, princial.get().getName());
+			return Publishers.map(chain.proceed(request), response -> {
+				MDC.remove(key);
+				return response;
+			});
+		} else {
+			return chain.proceed(request);
+		}
 	}
 }

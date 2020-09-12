@@ -22,7 +22,7 @@ public class HeaderLoggingTurboFilter extends TurboFilter {
 			return FilterReply.NEUTRAL;
 		}
 
-		var value = MDC.get(HeaderLoggingHttpFilter.MDC_KEY);
+		var value = MDC.get(HeaderLoggingServerHttpFilter.MDC_KEY);
 		if (value == null) {
 			return FilterReply.NEUTRAL;
 		}

@@ -19,7 +19,7 @@ import io.micronaut.http.client.annotation.Client;
 import io.micronaut.security.token.jwt.signature.SignatureGeneratorConfiguration;
 
 /**
- * Contoller for testing {@link HeaderLoggingHttpFilter} and {@link PrincipalHttpFilter}.
+ * Contoller for testing {@link HeaderLoggingServerHttpFilter} and {@link PrincipalHttpFilter}.
  *
  * @author Stephan Schnabel
  */
@@ -48,7 +48,7 @@ public class TestClient {
 			request.bearerAuth(token);
 		}
 		if (header != null) {
-			request.getHeaders().add(HeaderLoggingHttpFilter.DEFAULT_HEADER, header);
+			request.getHeaders().add(HeaderLoggingServerHttpFilter.DEFAULT_HEADER, header);
 		}
 
 		var response = client.toBlocking().exchange(request, TestResponse.class);

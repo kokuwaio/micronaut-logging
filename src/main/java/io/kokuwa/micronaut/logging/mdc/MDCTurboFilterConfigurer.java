@@ -10,6 +10,7 @@ import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.type.Argument;
+import io.micronaut.core.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Requires(beans = LogbackUtil.class)
 @Requires(property = MDCTurboFilterConfigurer.PREFIX)
-@Requires(property = MDCTurboFilterConfigurer.ENABLED, notEquals = "false")
+@Requires(property = MDCTurboFilterConfigurer.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @BootstrapContextCompatible
 @Context
 @Internal
@@ -27,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MDCTurboFilterConfigurer {
 
 	public static final String PREFIX = "logger.mdc";
-	public static final String ENABLED = PREFIX + ".enabled";
 
 	private final LogbackUtil logback;
 	private final Environment environment;

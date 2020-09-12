@@ -6,15 +6,15 @@
 
 Buildin appender:
  * console format
- * stackdriver format (with support for error reporting)
+ * Stackdriver format (with support for error reporting)
 
 ### Set log level based on MDC values
 
-Confguration:
+Configuration:
  * *enabled*: enable MDC filter (`true` is default)
  * *key*: MDC key, is optional (will use name instead, see example `user` below)
  * *level*: log level to use (`TRACE` is default)
- * *loggers*: whitelist of logger names, matches all loggers if empty
+ * *loggers*: passlist of logger names, matches all loggers if empty
  * *values*: values for matching MDC key, matches all values if empty
 
 Example for setting  different values for different values/logger:
@@ -66,21 +66,32 @@ logger:
 
 ### Set log level based on HTTP request header
 
-Confguration:
- * *enabled*: enable HTTP request filter (`true` is default)
+Configuration for server filter (prefixed with *logger.request.filter*):
+ * *enabled*: enable HTTP server filter (`true` is default)
  * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (highest is default)
- * *pattern*: filter pattern (`/**` is default)
+ * *path*: filter path (`/**` is default)
  * *header*: name of HTTP header (`x-log-level` is default)
+ 
+Configuration for client filter for propagation (prefixed with *logger.request.propagation*):
+ * *enabled*: enable HTTP client filter (`true` is default)
+ * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (tracing is default)
+ * *path*: filter path (`/**` is default)
+ * *header*: name of HTTP header (server header is default)
 
 Example with default configuration:
 ```
 logger:
   request:
-    header:
+    filter:
       enabled: true
       order: -2147483648
-      pattern: /**
+      path: /**
       header: x-log-level
+    propagation:
+      enabled: true
+      order: 19000
+      path: /**
+      header: ${logger.request.header.header-name}
 ```
 
 ### Add princial for request to MDC
@@ -88,7 +99,7 @@ logger:
 Confguration:
  * *enabled*: enable HTTP principal filter (`true` is default)
  * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) ([ServerFilterPhase.SECURITY.after()](https://github.com/micronaut-projects/micronaut-core/blob/v2.0.1/http/src/main/java/io/micronaut/http/filter/ServerFilterPhase.java#L54) is default)
- * *pattern*: filter pattern (`/**` is default)
+ * *path*: filter path (`/**` is default)
  * *key*: name of MDC header (`principal` is default)
 
 Example with default configuration:
@@ -98,7 +109,7 @@ logger:
     principal:
       enabled: true
       order: 39250
-      pattern: /**
+      path: /**
       key: principal
 ```
 

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Controller for testing {@link HeaderLoggingHttpFilter} and {@link PrincipalHttpFilter}.
+ * Controller for testing {@link HeaderLoggingServerHttpFilter} and {@link PrincipalHttpFilter}.
  *
  * @author Stephan Schnabel
  */

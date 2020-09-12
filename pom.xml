@@ -42,7 +42,7 @@
 		<!-- ===================================================================== -->
 
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-		<version.io.micronaut>2.0.1</version.io.micronaut>
+		<version.io.micronaut>2.0.2</version.io.micronaut>
 
 	</properties>
 
