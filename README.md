@@ -2,9 +2,8 @@
 
 ## Features
 
-### Preconfigured Appender
+### Available Appender
 
-Buildin appender:
  * console format
  * Stackdriver format (with support for error reporting)
 
@@ -94,9 +93,9 @@ logger:
       header: ${logger.request.header.header-name}
 ```
 
-### Add princial for request to MDC
+### Add principal for request to MDC
 
-Confguration:
+Configuration:
  * *enabled*: enable HTTP principal filter (`true` is default)
  * *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) ([ServerFilterPhase.SECURITY.after()](https://github.com/micronaut-projects/micronaut-core/blob/v2.0.1/http/src/main/java/io/micronaut/http/filter/ServerFilterPhase.java#L54) is default)
  * *path*: filter path (`/**` is default)
