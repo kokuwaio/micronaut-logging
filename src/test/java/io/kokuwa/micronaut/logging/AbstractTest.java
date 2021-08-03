@@ -2,11 +2,11 @@ package io.kokuwa.micronaut.logging;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer.MethodName;
+import org.junit.jupiter.api.MethodOrderer.DisplayName;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.MDC;
 
-import io.micronaut.test.annotation.MicronautTest;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 
 /**
  * Base for tests regarding logging.
@@ -14,7 +14,7 @@ import io.micronaut.test.annotation.MicronautTest;
  * @author Stephan Schnabel
  */
 @MicronautTest
-@TestMethodOrder(MethodName.class)
+@TestMethodOrder(DisplayName.class)
 public abstract class AbstractTest {
 
 	@BeforeEach

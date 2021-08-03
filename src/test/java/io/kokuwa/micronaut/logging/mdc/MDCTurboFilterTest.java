@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import io.kokuwa.micronaut.logging.AbstractTest;
-import io.micronaut.test.annotation.MicronautTest;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 
 /**
  * Test for {@link MDCTurboFilterConfigurer}.

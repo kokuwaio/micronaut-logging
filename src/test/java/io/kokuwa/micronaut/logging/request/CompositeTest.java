@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.qos.logback.classic.Level;
 import io.kokuwa.micronaut.logging.AbstractTest;
-import io.micronaut.test.annotation.MicronautTest;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 
 /**
  * Test for MDC and request filter combined.

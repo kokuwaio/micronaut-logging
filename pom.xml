@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>io.kokuwa</groupId>
 		<artifactId>maven-parent</artifactId>
-		<version>0.2.3</version>
+		<version>0.5.0</version>
 		<relativePath />
 	</parent>
 
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>Logging support for Micronaut</name>
 	<description>Endhanced logging using MDC or request header.</description>
@@ -49,7 +49,7 @@
 		<!-- ===================================================================== -->
 
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-		<version.io.micronaut>2.0.2</version.io.micronaut>
+		<version.io.micronaut>2.5.13</version.io.micronaut>
 
 	</properties>
 
