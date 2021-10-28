@@ -2,10 +2,35 @@
 
 ## Features
 
+### Default logback.xml
+
+If no `logback.xml` by user is provided a default [logback.xml](src/main/resources/io/kokuwa/logback/logback-default.xml) is loaded. Otherwise use custom [logback.xml](src/main/resources/io/kokuwa/logback/logback-example.xml):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="false">
+ <include resource="io/kokuwa/logback/base.xml" />
+ <logger name="io.micronaut.logging.PropertiesLoggingLevelsConfigurer" levels="WARN" />
+ <root level="INFO">
+  <appender-ref ref="${LOGBACK_APPENDER:-CONSOLE}" />
+ </root>
+</configuration>
+```
+
 ### Available Appender
 
-* console format
-* Stackdriver format (with support for error reporting)
+* console with jansi for developers
+* gcp logging format (with support for error reporting)
+* json
+
+### AutoSelect appender logback.xml
+
+1. if `LOGBACK_APPENDER` is set this appender will be used
+2. if GCP is detected gcp appender will be used
+3. if Kubernetes is detected json appender will be used
+4. console appender else
+
+*IMPORTENT*: only works without custom `logback.xml`
 
 ### Set log level based on MDC values
 
@@ -72,14 +97,14 @@ logger:
 Configuration for server filter (prefixed with *logger.request.filter*):
 
 * *enabled*: enable HTTP server filter (`true` is default)
-* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (highest is default)
+* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/v2.5.13/core/src/main/java/io/micronaut/core/order/Ordered.java) (highest is default)
 * *path*: filter path (`/**` is default)
 * *header*: name of HTTP header (`x-log-level` is default)
 
 Configuration for client filter for propagation (prefixed with *logger.request.propagation*):
 
 * *enabled*: enable HTTP client filter (`true` is default)
-* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) (tracing is default)
+* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/v2.5.13/core/src/main/java/io/micronaut/core/order/Ordered.java) (tracing is default)
 * *path*: filter path (`/**` is default)
 * *header*: name of HTTP header (server header is default)
 
@@ -105,7 +130,7 @@ logger:
 Configuration:
 
 * *enabled*: enable HTTP principal filter (`true` is default)
-* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/master/core/src/main/java/io/micronaut/core/order/Ordered.java) ([ServerFilterPhase.SECURITY.after()](https://github.com/micronaut-projects/micronaut-core/blob/v2.0.1/http/src/main/java/io/micronaut/http/filter/ServerFilterPhase.java#L54) is default)
+* *order*: order for [Ordered](https://github.com/micronaut-projects/micronaut-core/blob/v2.5.13/core/src/main/java/io/micronaut/core/order/Ordered.java) ([ServerFilterPhase.SECURITY.after()](https://github.com/micronaut-projects/micronaut-core/blob/v2.5.13/http/src/main/java/io/micronaut/http/filter/ServerFilterPhase.java#L54) is default)
 * *path*: filter path (`/**` is default)
 * *key*: name of MDC header (`principal` is default)
 
@@ -148,6 +173,5 @@ mvn release:prepare release:perform release:clean -B -DreleaseProfiles=oss-relea
 ## Open Topics
 
 * configure mdc on refresh event
-* add stackdriver per configuration
-* add fluent per configuration
 * read **serviceName** and **serviceVersion** from yaml
+* support auto select appender with custom `logback.xml`

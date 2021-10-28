@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+	<appender name="GCP" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="io.kokuwa.micronaut.logging.layout.GcpJsonLayout">
+				<serviceName>${serviceName}</serviceName>
+				<serviceVersion>${serviceVersion}</serviceVersion>
+				<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
+				<appendLineSeparator>true</appendLineSeparator>
+				<includeMessage>true</includeMessage>
+				<includeContextName>false</includeContextName>
+			</layout>
+		</encoder>
+	</appender>
+
+</included>

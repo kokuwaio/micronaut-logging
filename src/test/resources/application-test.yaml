@@ -10,7 +10,3 @@ micronaut:
   http:
     client:
       logger-name: io.kokuwa.Test
-
-logger:
-  levels:
-    io.kokuwa.Test: TRACE

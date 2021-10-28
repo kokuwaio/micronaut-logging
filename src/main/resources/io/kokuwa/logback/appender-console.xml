@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<withJansi>${CONSOLE_LOG_JANSI:-true}</withJansi>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN:-%cyan(%d{HH:mm:ss.SSS}) %gray(%-6.6thread) %highlight(%-5level) %magenta(%32logger{32}) %mdc %msg%n}</pattern>
+			<charset>${CONSOLE_LOG_CHARSET:-default}</charset>
+		</encoder>
+	</appender>
+
+</included>

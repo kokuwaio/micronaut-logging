@@ -39,6 +39,8 @@ public class TestController {
 			level = Level.ERROR;
 		}
 
+		log.info("Test log for MDC inclusion, expected: {}", principal);
+
 		return new TestResponse(level.toString(), principal);
 	}
 
