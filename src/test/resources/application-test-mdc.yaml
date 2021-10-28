@@ -4,23 +4,23 @@ logger:
       key: key
       level: DEBUG
       loggers:
-      - io.kokuwa.a
-      - io.kokuwa.b
+        - io.kokuwa.a
+        - io.kokuwa.b
       values:
-      - value-1
-      - value-2
+        - value-1
+        - value-2
     key2:
       key: key
       level: TRACE
       loggers:
-      - io.kokuwa.b
-      - io.kokuwa.c
+        - io.kokuwa.b
+        - io.kokuwa.c
       values:
-      - value-2
+        - value-2
     key:
       level: TRACE
       loggers:
-      - io.kokuwa
+        - io.kokuwa
       values:
-      - value-3
+        - value-3
     user: {}

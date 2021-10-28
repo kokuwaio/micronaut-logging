@@ -3,6 +3,6 @@ logger:
     principal:
       level: DEBUG
       loggers:
-      - io.kokuwa
+        - io.kokuwa
       values:
-      - horst
+        - horst

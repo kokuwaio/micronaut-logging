@@ -1,37 +1,52 @@
 name: Release
 
-on:
+"on":
   workflow_dispatch: {}
 
 jobs:
-  build:
+
+  lint-yaml:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.GIT_ACTION_TOKEN }}
-    - name: git-configure
-      run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-    - name: setup
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-        server-id: sonatype-nexus
-        server-username: SERVER_USERNAME
-        server-password: SERVER_PASSWORD
-        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-        gpg-passphrase: GPG_PASSPHRASE
-    - name: dependencies
-      run: mvn -B -q dependency:go-offline
-    - name: prepare
-      run: mvn -B release:prepare
-    - name: perform
-      run: mvn -B release:perform
-      env:
-        SERVER_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-        SERVER_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      - uses: actions/checkout@v2
+      - uses: ibiqlik/action-yamllint@v3
+        with:
+          format: colored
+          strict: true
 
+  lint-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://avtodev/markdown-lint:v1
+        with:
+          args: /github/workspace
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - lint-markdown
+      - lint-yaml
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GIT_ACTION_TOKEN }}
+      - name: git-configure
+        run: |
+            git config user.email "actions@github.com"
+            git config user.name "GitHub Actions"
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: sonatype-nexus
+          server-username: SERVER_USERNAME
+          server-password: SERVER_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
+      - run: mvn -B dependency:go-offline -q
+      - run: mvn -B release:prepare
+      - run: mvn -B release:perform -DreleaseProfiles=oss-release
+        env:
+          SERVER_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          SERVER_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
