@@ -2,12 +2,11 @@ package io.kokuwa.micronaut.logging.request;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.inject.Inject;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.kokuwa.micronaut.logging.AbstractTest;
+import jakarta.inject.Inject;
 
 /**
  * Test for {@link PrincipalHttpFilter}.

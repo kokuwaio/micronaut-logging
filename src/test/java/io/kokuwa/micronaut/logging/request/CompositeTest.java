@@ -1,13 +1,12 @@
 package io.kokuwa.micronaut.logging.request;
 
-import javax.inject.Inject;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.qos.logback.classic.Level;
 import io.kokuwa.micronaut.logging.AbstractTest;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import jakarta.inject.Inject;
 
 /**
  * Test for MDC and request filter combined.

@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.JWTClaimsSet;
 
@@ -17,6 +14,8 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.security.token.jwt.signature.SignatureGeneratorConfiguration;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * Contoller for testing {@link HeaderLoggingServerHttpFilter} and {@link PrincipalHttpFilter}.
