@@ -4,8 +4,8 @@
 	<appender name="GCP" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
 			<layout class="io.kokuwa.micronaut.logging.layout.GcpJsonLayout">
-				<serviceName>${serviceName}</serviceName>
-				<serviceVersion>${serviceVersion}</serviceVersion>
+				<serviceName>${SERVICE_NAME}</serviceName>
+				<serviceVersion>${SERVICE_VERSION}</serviceVersion>
 				<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
 				<appendLineSeparator>true</appendLineSeparator>
 				<includeMessage>true</includeMessage>

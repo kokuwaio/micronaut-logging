@@ -9,6 +9,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.contrib.json.classic.JsonLayout;
 import io.micronaut.core.util.StringUtils;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * GCP logging layout.
@@ -17,6 +18,7 @@ import lombok.Setter;
  * @see "https://cloud.google.com/logging/docs/agent/configuration#process-payload"
  * @see "https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext"
  */
+@Accessors(chain = false)
 public class GcpJsonLayout extends JsonLayout {
 
 	private static final String UNDEFINED = "_IS_UNDEFINED";
