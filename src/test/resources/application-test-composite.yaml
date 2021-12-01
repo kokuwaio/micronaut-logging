@@ -1,8 +1,0 @@
-logger:
-  mdc:
-    principal:
-      level: DEBUG
-      loggers:
-        - io.kokuwa
-      values:
-        - horst

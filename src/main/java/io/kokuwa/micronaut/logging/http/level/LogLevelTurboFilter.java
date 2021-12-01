@@ -1,4 +1,4 @@
-package io.kokuwa.micronaut.logging.request;
+package io.kokuwa.micronaut.logging.http.level;
 
 import org.slf4j.MDC;
 import org.slf4j.Marker;
@@ -13,7 +13,7 @@ import ch.qos.logback.core.spi.FilterReply;
  *
  * @author Stephan Schnabel
  */
-public class HeaderLoggingTurboFilter extends TurboFilter {
+public class LogLevelTurboFilter extends TurboFilter {
 
 	@Override
 	public FilterReply decide(Marker marker, Logger logger, Level level, String format, Object[] params, Throwable t) {
@@ -22,7 +22,7 @@ public class HeaderLoggingTurboFilter extends TurboFilter {
 			return FilterReply.NEUTRAL;
 		}
 
-		var value = MDC.get(HeaderLoggingServerHttpFilter.MDC_KEY);
+		var value = MDC.get(LogLevelServerFilter.MDC_KEY);
 		if (value == null) {
 			return FilterReply.NEUTRAL;
 		}

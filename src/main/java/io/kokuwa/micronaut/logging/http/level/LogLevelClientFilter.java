@@ -1,4 +1,4 @@
-package io.kokuwa.micronaut.logging.request;
+package io.kokuwa.micronaut.logging.http.level;
 
 import java.util.Optional;
 
@@ -13,30 +13,29 @@ import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.context.ServerRequestContext;
 import io.micronaut.http.filter.ClientFilterChain;
 import io.micronaut.http.filter.HttpClientFilter;
-import io.micronaut.http.filter.ServerFilterPhase;
 
 /**
- * Http request logging filter.
+ * Propagates log-level from server request to client.
  *
  * @author Stephan Schnabel
  */
-@Requires(beans = HeaderLoggingServerHttpFilter.class)
-@Requires(property = HeaderLoggingClientHttpFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
-@Filter("${" + HeaderLoggingClientHttpFilter.PREFIX + ".path:/**}")
-public class HeaderLoggingClientHttpFilter implements HttpClientFilter {
+@Requires(beans = LogLevelServerFilter.class)
+@Requires(property = LogLevelClientFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
+@Filter("${" + LogLevelClientFilter.PREFIX + ".path:/**}")
+public class LogLevelClientFilter implements HttpClientFilter {
 
-	public static final String PREFIX = "logger.request.propagation";
-	public static final int DEFAULT_ORDER = ServerFilterPhase.TRACING.order();
+	public static final String PREFIX = "logger.http.level.propagation";
+	public static final int DEFAULT_ORDER = HIGHEST_PRECEDENCE;
 
 	private final String serverHeader;
 	private final String propagationHeader;
 	private final int order;
 
-	public HeaderLoggingClientHttpFilter(
-			@Value("${" + HeaderLoggingServerHttpFilter.PREFIX + ".header}") Optional<String> serverHeader,
+	public LogLevelClientFilter(
+			@Value("${" + LogLevelServerFilter.PREFIX + ".header}") Optional<String> serverHeader,
 			@Value("${" + PREFIX + ".header}") Optional<String> propagationHeader,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
-		this.serverHeader = serverHeader.orElse(HeaderLoggingServerHttpFilter.DEFAULT_HEADER);
+		this.serverHeader = serverHeader.orElse(LogLevelServerFilter.DEFAULT_HEADER);
 		this.propagationHeader = propagationHeader.orElse(this.serverHeader);
 		this.order = order.orElse(DEFAULT_ORDER);
 	}

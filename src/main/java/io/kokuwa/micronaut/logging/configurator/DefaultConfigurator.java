@@ -1,5 +1,6 @@
 package io.kokuwa.micronaut.logging.configurator;
 
+import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.Configurator;
 import ch.qos.logback.core.joran.spi.JoranException;
@@ -29,5 +30,7 @@ public class DefaultConfigurator extends ContextAwareBase implements Configurato
 		} catch (JoranException e) {
 			addError("Failed to load logback.xml from io.kokuwa:micronaut-logging", e);
 		}
+
+		loggerContext.getLogger("io.micronaut.logging.PropertiesLoggingLevelsConfigurer").setLevel(Level.WARN);
 	}
 }

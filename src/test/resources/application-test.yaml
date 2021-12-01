@@ -7,6 +7,3 @@ micronaut:
             generator:
               secret: pleaseChangeThisSecretForANewOne
               jws-algorithm: HS256
-  http:
-    client:
-      logger-name: io.kokuwa.Test

@@ -17,7 +17,7 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
  *
  * @author Stephan Schnabel
  */
-@DisplayName("mdc")
+@DisplayName("mdc based log levels")
 @MicronautTest(environments = "test-mdc")
 public class MDCTurboFilterTest extends AbstractTest {
 
