@@ -1,11 +1,10 @@
 package io.kokuwa.micronaut.logging.http.mdc;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.reactivestreams.Publisher;
-import org.slf4j.MDC;
 
 import io.kokuwa.micronaut.logging.http.AbstractMdcFilter;
 import io.micronaut.context.annotation.Requires;
@@ -18,6 +17,7 @@ import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
 import io.micronaut.security.authentication.Authentication;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Filter to add claims from authentication to MDC.
@@ -28,6 +28,7 @@ import io.micronaut.security.authentication.Authentication;
 @Requires(classes = Authentication.class)
 @Requires(property = AuthenticationMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @Filter("${" + AuthenticationMdcFilter.PREFIX + ".path:/**}")
+@Slf4j
 public class AuthenticationMdcFilter extends AbstractMdcFilter {
 
 	public static final String PREFIX = "logger.http.authentication";
@@ -35,18 +36,19 @@ public class AuthenticationMdcFilter extends AbstractMdcFilter {
 	public static final int DEFAULT_ORDER = ServerFilterPhase.SECURITY.after();
 
 	private final String name;
-	private final List<String> attributes;
-	private final String prefix;
+	private final Set<String> attributes;
 
 	public AuthenticationMdcFilter(
-			@Value("${" + PREFIX + ".name:principal}") Optional<String> name,
-			@Value("${" + PREFIX + ".attributes:[]}") List<String> attributes,
+			@Value("${" + PREFIX + ".name}") Optional<String> name,
+			@Value("${" + PREFIX + ".attributes}") Optional<Set<String>> attributes,
 			@Value("${" + PREFIX + ".prefix}") Optional<String> prefix,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
-		super(order.orElse(DEFAULT_ORDER));
+		super(order.orElse(DEFAULT_ORDER), prefix.orElse(null));
 		this.name = name.orElse(DEFAULT_NAME);
-		this.prefix = prefix.orElse(null);
-		this.attributes = attributes;
+		this.attributes = attributes.orElseGet(Set::of);
+		if (name.isPresent() || !this.attributes.isEmpty()) {
+			log.info("Configured with name {} and attributes {}", name, attributes);
+		}
 	}
 
 	@Override
@@ -54,21 +56,21 @@ public class AuthenticationMdcFilter extends AbstractMdcFilter {
 
 		// get authentication
 
-		var optional = request.getUserPrincipal(Authentication.class);
-		if (optional.isEmpty()) {
+		var authenticationOptional = request.getUserPrincipal(Authentication.class);
+		if (authenticationOptional.isEmpty()) {
 			return chain.proceed(request);
 		}
-		var authentication = optional.get();
+		var authentication = authenticationOptional.get();
 		var authenticationAttributes = authentication.getAttributes();
 
 		// add mdc
 
 		var mdc = new HashMap<String, String>();
-		MDC.put(prefix == null ? name : prefix + name, authentication.getName());
-		for (var header : attributes) {
-			var value = authenticationAttributes.get(header);
-			if (value != null) {
-				mdc.put(prefix == null ? header : prefix + header, String.valueOf(value));
+		mdc.put(name, authentication.getName());
+		for (var attibuteName : attributes) {
+			var attibuteValue = authenticationAttributes.get(attibuteName);
+			if (attibuteValue != null) {
+				mdc.put(attibuteName, String.valueOf(attibuteValue));
 			}
 		}
 

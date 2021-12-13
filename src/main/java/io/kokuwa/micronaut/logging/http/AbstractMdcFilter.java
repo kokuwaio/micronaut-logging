@@ -18,10 +18,12 @@ import io.micronaut.http.filter.ServerFilterChain;
  */
 public abstract class AbstractMdcFilter implements HttpServerFilter {
 
-	private final int order;
+	protected final int order;
+	protected final String prefix;
 
-	public AbstractMdcFilter(Integer order) {
+	protected AbstractMdcFilter(Integer order, String prefix) {
 		this.order = order;
+		this.prefix = prefix;
 	}
 
 	@Override
@@ -38,10 +40,14 @@ public abstract class AbstractMdcFilter implements HttpServerFilter {
 			return chain.proceed(request);
 		}
 
-		mdc.forEach(MDC::put);
+		mdc.forEach((key, value) -> MDC.put(addPrefix(key), value));
 		return Publishers.map(chain.proceed(request), response -> {
-			mdc.keySet().forEach(MDC::remove);
+			mdc.keySet().forEach(key -> MDC.remove(addPrefix(key)));
 			return response;
 		});
+	}
+
+	private String addPrefix(String key) {
+		return prefix == null ? key : prefix + key;
 	}
 }

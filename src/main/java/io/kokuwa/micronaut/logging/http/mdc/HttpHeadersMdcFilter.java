@@ -18,6 +18,7 @@ import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Filter to add http headers to MDC.
@@ -28,21 +29,21 @@ import io.micronaut.runtime.context.scope.Refreshable;
 @Requires(property = HttpHeadersMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @Requires(property = HttpHeadersMdcFilter.PREFIX + ".names")
 @Filter("${" + HttpHeadersMdcFilter.PREFIX + ".path:/**}")
+@Slf4j
 public class HttpHeadersMdcFilter extends AbstractMdcFilter {
 
 	public static final String PREFIX = "logger.http.headers";
 	public static final int DEFAULT_ORDER = ServerFilterPhase.FIRST.before();
 
 	private final Set<String> headers;
-	private final String prefix;
 
 	public HttpHeadersMdcFilter(
 			@Value("${" + PREFIX + ".names}") List<String> headers,
 			@Value("${" + PREFIX + ".prefix}") Optional<String> prefix,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
-		super(order.orElse(DEFAULT_ORDER));
-		this.prefix = prefix.orElse(null);
+		super(order.orElse(DEFAULT_ORDER), prefix.orElse(null));
 		this.headers = headers.stream().map(String::toLowerCase).collect(Collectors.toSet());
+		log.info("Configured with header names {}", headers);
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class HttpHeadersMdcFilter extends AbstractMdcFilter {
 		for (var header : headers) {
 			request.getHeaders()
 					.getFirst(header)
-					.ifPresent(value -> mdc.put(prefix == null ? header : prefix + header, String.valueOf(value)));
+					.ifPresent(value -> mdc.put(header, String.valueOf(value)));
 		}
 		return doFilter(request, chain, mdc);
 	}

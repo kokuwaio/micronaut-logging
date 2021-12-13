@@ -1,19 +1,18 @@
 package io.kokuwa.micronaut.logging.http.level;
 
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.reactivestreams.Publisher;
-import org.slf4j.MDC;
 
 import ch.qos.logback.classic.turbo.TurboFilter;
 import io.kokuwa.micronaut.logging.LogbackUtil;
 import io.kokuwa.micronaut.logging.http.AbstractMdcFilter;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.annotation.Value;
-import io.micronaut.core.async.publisher.Publishers;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
@@ -45,7 +44,7 @@ public class LogLevelServerFilter extends AbstractMdcFilter {
 			LogbackUtil logback,
 			@Value("${" + PREFIX + ".header}") Optional<String> header,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
-		super(order.orElse(DEFAULT_ORDER));
+		super(order.orElse(DEFAULT_ORDER), null);
 		this.logback = logback;
 		this.header = header.orElse(DEFAULT_HEADER);
 	}
@@ -62,15 +61,8 @@ public class LogLevelServerFilter extends AbstractMdcFilter {
 
 	@Override
 	public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
-		var level = request.getHeaders().getFirst(header);
-		if (level.isPresent()) {
-			MDC.put(MDC_KEY, level.get());
-			return Publishers.map(chain.proceed(request), response -> {
-				MDC.remove(MDC_KEY);
-				return response;
-			});
-		} else {
-			return chain.proceed(request);
-		}
+		return request.getHeaders().getFirst(header)
+				.map(level -> doFilter(request, chain, Map.of(MDC_KEY, level)))
+				.orElseGet(() -> chain.proceed(request));
 	}
 }
