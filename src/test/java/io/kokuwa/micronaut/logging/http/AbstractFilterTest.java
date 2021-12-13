@@ -21,6 +21,7 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.client.DefaultHttpClientConfiguration;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.filter.HttpServerFilter;
@@ -79,9 +80,9 @@ public abstract class AbstractFilterTest extends AbstractTest {
 	// request
 
 	@SneakyThrows
-	public TestResponse get(Map<String, String> headers) {
+	public TestResponse get(String path, Map<String, String> headers) {
 
-		var request = HttpRequest.GET("/");
+		var request = HttpRequest.GET(path);
 		headers.forEach((name, value) -> request.header(name, value));
 		var configuration = new DefaultHttpClientConfiguration();
 		configuration.setLoggerName("io.kokuwa.TestClient");
@@ -100,8 +101,8 @@ public abstract class AbstractFilterTest extends AbstractTest {
 	@Slf4j
 	public static class TestController {
 
-		@Get("/")
-		TestResponse run() {
+		@Get("/{+path}")
+		TestResponse run(@PathVariable String path) {
 
 			var level = Level.OFF;
 			if (log.isTraceEnabled()) {
@@ -119,7 +120,7 @@ public abstract class AbstractFilterTest extends AbstractTest {
 			var mdc = MDC.getCopyOfContextMap();
 			log.info("Found MDC: {}", mdc);
 
-			return new TestResponse(level.toString(), mdc == null ? Map.of() : mdc);
+			return new TestResponse(path, level.toString(), mdc == null ? Map.of() : mdc);
 		}
 	}
 
@@ -127,6 +128,7 @@ public abstract class AbstractFilterTest extends AbstractTest {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class TestResponse {
+		private String path;
 		private String level;
 		private Map<String, String> context = Map.of();
 	}

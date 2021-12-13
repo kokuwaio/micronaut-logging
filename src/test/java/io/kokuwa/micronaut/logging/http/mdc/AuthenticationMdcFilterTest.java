@@ -63,7 +63,7 @@ public class AuthenticationMdcFilterTest extends AbstractFilterTest {
 	}
 
 	private Map<String, String> getContext(boolean token) {
-		return get(token
+		return get("/security", token
 				? Map.of(HttpHeaders.AUTHORIZATION, token("mySubject", claims -> claims
 						.issuer("nope")
 						.claim("azp", "myAzp")
