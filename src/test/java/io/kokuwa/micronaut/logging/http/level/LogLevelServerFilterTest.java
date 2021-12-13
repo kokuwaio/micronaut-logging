@@ -75,6 +75,6 @@ public class LogLevelServerFilterTest extends AbstractFilterTest {
 
 	private void assertLevel(Level expectedLevel, String name, String value) {
 		var headers = value == null ? Map.<String, String>of() : Map.of(name, value);
-		assertEquals(expectedLevel.toString(), get(headers).getLevel());
+		assertEquals(expectedLevel.toString(), get("/level", headers).getLevel());
 	}
 }

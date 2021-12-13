@@ -55,6 +55,6 @@ public class HeaderMdcFilterTest extends AbstractFilterTest {
 	}
 
 	private void assertContext(Map<String, String> expectedMdcs, Map<String, String> headers) {
-		assertEquals(expectedMdcs, get(headers).getContext());
+		assertEquals(expectedMdcs, get("/header", headers).getContext());
 	}
 }
