@@ -26,18 +26,18 @@ import lombok.extern.slf4j.Slf4j;
  * @author Stephan Schnabel
  */
 @Refreshable
-@Requires(property = HttpHeadersMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
-@Requires(property = HttpHeadersMdcFilter.PREFIX + ".names")
-@Filter("${" + HttpHeadersMdcFilter.PREFIX + ".path:/**}")
+@Requires(property = HeaderMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
+@Requires(property = HeaderMdcFilter.PREFIX + ".names")
+@Filter("${" + HeaderMdcFilter.PREFIX + ".path:/**}")
 @Slf4j
-public class HttpHeadersMdcFilter extends AbstractMdcFilter {
+public class HeaderMdcFilter extends AbstractMdcFilter {
 
-	public static final String PREFIX = "logger.http.headers";
+	public static final String PREFIX = "logger.http.header";
 	public static final int DEFAULT_ORDER = ServerFilterPhase.FIRST.before();
 
 	private final Set<String> headers;
 
-	public HttpHeadersMdcFilter(
+	public HeaderMdcFilter(
 			@Value("${" + PREFIX + ".names}") List<String> headers,
 			@Value("${" + PREFIX + ".prefix}") Optional<String> prefix,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
