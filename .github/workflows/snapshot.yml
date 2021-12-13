@@ -2,10 +2,7 @@ name: Snapshot
 
 "on":
   workflow_dispatch: {}
-  push:
-    branches:
-      - main
-      - '*.x'
+  push: {}
 
 jobs:
 
@@ -42,7 +39,19 @@ jobs:
           server-username: SERVER_USERNAME
           server-password: SERVER_PASSWORD
       - run: mvn -B dependency:go-offline -q
+      - run: mvn -B verify
+        if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/3.x'
       - run: mvn -B deploy -Poss
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/3.x'
         env:
           SERVER_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           SERVER_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+      - uses: dorny/test-reporter@v1
+        if: failure()
+        with:
+          name: surefire
+          path: '*/target/surefire-reports/*.xml'
+          reporter: java-junit
+          list-suites: failed
+          list-tests: failed
+          fail-on-error: false
