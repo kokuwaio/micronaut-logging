@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.kokuwa</groupId>
 		<artifactId>maven-parent</artifactId>
-		<version>0.5.4</version>
+		<version>0.5.6</version>
 		<relativePath />
 	</parent>
 
@@ -48,6 +48,7 @@
 		<!-- ============================= Libaries ============================== -->
 		<!-- ===================================================================== -->
 
+		<version.ch.qos.logback>1.2.8</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.micronaut>2.5.13</version.io.micronaut>
 
@@ -66,6 +67,11 @@
 			</dependency>
 
 			<!-- logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.ch.qos.logback}</version>
+			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback.contrib</groupId>
 				<artifactId>logback-json-classic</artifactId>
