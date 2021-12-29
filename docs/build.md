@@ -19,5 +19,5 @@ mvn versions:update-parent versions:update-properties
 Run:
 
 ```sh
-mvn release:prepare release:perform release:clean -B -DreleaseProfiles=oss-release
+mvn release:prepare release:perform release:clean -B
 ```
