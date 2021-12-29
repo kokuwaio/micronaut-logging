@@ -17,7 +17,6 @@ import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
 import io.micronaut.security.authentication.Authentication;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Filter to add claims from authentication to MDC.
@@ -28,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @Requires(classes = Authentication.class)
 @Requires(property = AuthenticationMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @Filter("${" + AuthenticationMdcFilter.PREFIX + ".path:/**}")
-@Slf4j
 public class AuthenticationMdcFilter extends AbstractMdcFilter {
 
 	public static final String PREFIX = "logger.http.authentication";

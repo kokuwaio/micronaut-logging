@@ -21,7 +21,6 @@ import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Filter to add request path parts to MDC.
@@ -32,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @Requires(property = PathMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @Requires(property = PathMdcFilter.PREFIX + ".patterns")
 @Filter("${" + PathMdcFilter.PREFIX + ".path:/**}")
-@Slf4j
 public class PathMdcFilter extends AbstractMdcFilter {
 
 	public static final String PREFIX = "logger.http.path";

@@ -81,7 +81,6 @@
 		<version.ch.qos.logback>1.2.8</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.micronaut>3.2.3</version.io.micronaut>
-		<version.org.projectlombok>1.18.22</version.org.projectlombok>
 
 		<!-- plugins -->
 
@@ -171,13 +170,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- build -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- logback -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -208,11 +200,6 @@
 					<version>${version.org.apache.maven.plugins.compiler}</version>
 					<configuration>
 						<annotationProcessorPaths>
-							<path>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-								<version>${version.org.projectlombok}</version>
-							</path>
 							<path>
 								<groupId>io.micronaut</groupId>
 								<artifactId>micronaut-inject-java</artifactId>

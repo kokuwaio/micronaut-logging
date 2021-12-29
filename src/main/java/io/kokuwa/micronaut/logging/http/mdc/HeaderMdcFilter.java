@@ -18,7 +18,6 @@ import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Filter to add http headers to MDC.
@@ -29,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 @Requires(property = HeaderMdcFilter.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @Requires(property = HeaderMdcFilter.PREFIX + ".names")
 @Filter("${" + HeaderMdcFilter.PREFIX + ".path:/**}")
-@Slf4j
 public class HeaderMdcFilter extends AbstractMdcFilter {
 
 	public static final String PREFIX = "logger.http.header";

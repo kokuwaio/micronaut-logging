@@ -3,6 +3,8 @@ package io.kokuwa.micronaut.logging.http;
 import java.util.Map;
 
 import org.reactivestreams.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import io.micronaut.core.async.publisher.Publishers;
@@ -18,6 +20,7 @@ import io.micronaut.http.filter.ServerFilterChain;
  */
 public abstract class AbstractMdcFilter implements HttpServerFilter {
 
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	protected final int order;
 	protected final String prefix;
 

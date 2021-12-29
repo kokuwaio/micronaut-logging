@@ -2,6 +2,7 @@ package io.kokuwa.micronaut.logging.http;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -9,8 +10,13 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.JWTClaimsSet;
 
 import ch.qos.logback.classic.Level;
@@ -31,11 +37,6 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.token.jwt.signature.SignatureGeneratorConfiguration;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Test for {@link HttpServerFilter}.
@@ -70,16 +71,19 @@ public abstract class AbstractFilterTest extends AbstractTest {
 		return token(subject, claims -> {});
 	}
 
-	@SneakyThrows
 	public String token(String subject, Consumer<JWTClaimsSet.Builder> manipulator) {
 		var claims = new JWTClaimsSet.Builder().subject(subject);
 		manipulator.accept(claims);
-		return HttpHeaderValues.AUTHORIZATION_PREFIX_BEARER + " " + signature.sign(claims.build()).serialize();
+		try {
+			return HttpHeaderValues.AUTHORIZATION_PREFIX_BEARER + " " + signature.sign(claims.build()).serialize();
+		} catch (JOSEException e) {
+			fail(e);
+			return null;
+		}
 	}
 
 	// request
 
-	@SneakyThrows
 	public TestResponse get(String path, Map<String, String> headers) {
 
 		var request = HttpRequest.GET(path);
@@ -98,8 +102,9 @@ public abstract class AbstractFilterTest extends AbstractTest {
 
 	@Secured({ SecurityRule.IS_ANONYMOUS, SecurityRule.IS_AUTHENTICATED })
 	@Controller
-	@Slf4j
 	public static class TestController {
+
+		private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
 		@Get("/{+path}")
 		TestResponse run(@PathVariable String path) {
@@ -120,16 +125,36 @@ public abstract class AbstractFilterTest extends AbstractTest {
 			var mdc = MDC.getCopyOfContextMap();
 			log.info("Found MDC: {}", mdc);
 
-			return new TestResponse(path, level.toString(), mdc == null ? Map.of() : mdc);
+			return new TestResponse(path, level.toString(), mdc);
 		}
 	}
 
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
 	public static class TestResponse {
-		private String path;
-		private String level;
-		private Map<String, String> context = Map.of();
+
+		private final String path;
+		private final String level;
+		private final Map<String, String> context;
+
+		@JsonCreator
+		public TestResponse(
+				@JsonProperty("path") String path,
+				@JsonProperty("level") String level,
+				@JsonProperty("context") Map<String, String> context) {
+			this.path = path;
+			this.level = level;
+			this.context = context == null ? Map.of() : context;
+		}
+
+		public String getPath() {
+			return path;
+		}
+
+		public String getLevel() {
+			return level;
+		}
+
+		public Map<String, String> getContext() {
+			return context;
+		}
 	}
 }
