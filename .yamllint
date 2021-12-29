@@ -5,3 +5,6 @@ rules:
 
   # no need for document start
   document-start: disable
+
+  # line length is not important
+  line-length: disable

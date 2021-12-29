@@ -2,21 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>io.kokuwa</groupId>
-		<artifactId>maven-parent</artifactId>
-		<version>0.5.5</version>
-		<relativePath />
-	</parent>
-
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
 
-	<name>Logging support for Micronaut</name>
+	<name>Logging Support for Micronaut</name>
 	<description>Enhanced logging using MDC or request header.</description>
 	<url>https://github.com/kokuwaio/micronaut-logging</url>
 	<inceptionYear>2020</inceptionYear>
+	<organization>
+		<name>Kokuwa.io</name>
+		<url>http://kokuwa.io</url>
+	</organization>
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
@@ -26,8 +23,12 @@
 
 	<developers>
 		<developer>
+			<id>stephanschnabel</id>
 			<name>Stephan Schnabel</name>
 			<url>https://github.com/stephanschnabel</url>
+			<email>stephan@grayc.de</email>
+			<organization>GrayC GmbH</organization>
+			<organizationUrl>http://grayc.de</organizationUrl>
 		</developer>
 	</developers>
 
@@ -41,16 +42,62 @@
 		<system>github</system>
 		<url>https://github.com/kokuwaio/micronaut-logging/issues</url>
 	</issueManagement>
+	<ciManagement>
+		<system>github</system>
+		<url>https://github.com/kokuwaio/micronaut-logging/actions</url>
+	</ciManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<properties>
 
 		<!-- ===================================================================== -->
-		<!-- ============================= Libaries ============================== -->
+		<!-- ============================== Build ================================ -->
 		<!-- ===================================================================== -->
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+
+		<!-- ===================================================================== -->
+		<!-- ============================= Versions ============================== -->
+		<!-- ===================================================================== -->
+
+		<!-- dependencies -->
 
 		<version.ch.qos.logback>1.2.8</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.micronaut>3.2.3</version.io.micronaut>
+		<version.org.projectlombok>1.18.22</version.org.projectlombok>
+
+		<!-- plugins -->
+
+		<version.org.apache.maven.plugins.clean>3.1.0</version.org.apache.maven.plugins.clean>
+		<version.org.apache.maven.plugins.compiler>3.8.1</version.org.apache.maven.plugins.compiler>
+		<version.org.apache.maven.plugins.deploy>3.0.0-M1</version.org.apache.maven.plugins.deploy>
+		<version.org.apache.maven.plugins.gpg>3.0.1</version.org.apache.maven.plugins.gpg>
+		<version.org.apache.maven.plugins.install>3.0.0-M1</version.org.apache.maven.plugins.install>
+		<version.org.apache.maven.plugins.javadoc>3.3.1</version.org.apache.maven.plugins.javadoc>
+		<version.org.apache.maven.plugins.jar>3.2.0</version.org.apache.maven.plugins.jar>
+		<version.org.apache.maven.plugins.release>3.0.0-M4</version.org.apache.maven.plugins.release>
+		<version.org.apache.maven.plugins.resources>3.2.0</version.org.apache.maven.plugins.resources>
+		<version.org.apache.maven.plugins.source>3.2.1</version.org.apache.maven.plugins.source>
+		<version.org.apache.maven.plugins.surefire>3.0.0-M5</version.org.apache.maven.plugins.surefire>
+		<version.org.codehaus.mojo.tidy>1.1.0</version.org.codehaus.mojo.tidy>
+		<version.org.sonatype.plugins.nexus-staging>1.6.8</version.org.sonatype.plugins.nexus-staging>
 
 	</properties>
 
@@ -124,14 +171,14 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- avoid compiler warning, see https://docs.micronaut.io/latest/guide/#_nullable_annotations -->
+		<!-- build -->
 		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>jsr305</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- logging -->
+		<!-- logback -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -148,28 +195,182 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.clean}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.compiler}</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${version.org.projectlombok}</version>
+							</path>
+							<path>
+								<groupId>io.micronaut</groupId>
+								<artifactId>micronaut-inject-java</artifactId>
+								<version>${version.io.micronaut}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.deploy}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.gpg}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.install}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.javadoc}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.jar}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.release}</version>
+					<configuration>
+						<tagNameFormat>@{project.version}</tagNameFormat>
+						<releaseProfiles>release</releaseProfiles>
+						<localCheckout>true</localCheckout>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.resources}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.source}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.surefire}</version>
+					<configuration>
+						<redirectTestOutputToFile>true</redirectTestOutputToFile>
+						<failIfNoTests>true</failIfNoTests>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>tidy-maven-plugin</artifactId>
+					<version>${version.org.codehaus.mojo.tidy}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${version.org.sonatype.plugins.nexus-staging}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 
-			<!-- add compiler processors -->
+			<!-- add source for downstream projects -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${version.org.projectlombok}</version>
-						</path>
-						<path>
-							<groupId>io.micronaut</groupId>
-							<artifactId>micronaut-inject-java</artifactId>
-							<version>${version.io.micronaut}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- fail if any pom is dirty -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tidy-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+
+					<!-- add javadoc for downstream projects -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- sign documents before upload -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<!-- Prevent `gpg` from using pinentry programs -->
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- autoclose sonatype nexus repo -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>sonatype-nexus</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

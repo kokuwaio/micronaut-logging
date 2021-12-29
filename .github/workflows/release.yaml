@@ -25,7 +25,7 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
       - run: mvn -B dependency:go-offline -q
       - run: mvn -B release:prepare
-      - run: mvn -B release:perform -DreleaseProfiles=oss-release
+      - run: mvn -B release:perform
         env:
           SERVER_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           SERVER_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
