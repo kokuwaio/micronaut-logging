@@ -50,7 +50,13 @@ public class MDCTurboFilter extends TurboFilter {
 	}
 
 	@Override
-	public FilterReply decide(Marker marker, Logger logger, Level level, String format, Object[] params, Throwable t) {
+	public FilterReply decide(
+			Marker marker,
+			Logger logger,
+			Level eventLevel,
+			String format,
+			Object[] params,
+			Throwable t) {
 
 		if (logger == null || !isStarted()) {
 			return FilterReply.NEUTRAL;
@@ -67,6 +73,6 @@ public class MDCTurboFilter extends TurboFilter {
 			return FilterReply.NEUTRAL;
 		}
 
-		return level.isGreaterOrEqual(this.level) ? FilterReply.ACCEPT : FilterReply.NEUTRAL;
+		return eventLevel.isGreaterOrEqual(this.level) ? FilterReply.ACCEPT : FilterReply.NEUTRAL;
 	}
 }

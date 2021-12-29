@@ -56,4 +56,12 @@ public class GcpJsonLayout extends JsonLayout {
 			map.put("serviceContext", serviceContext);
 		}
 	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public void setServiceVersion(String serviceVersion) {
+		this.serviceVersion = serviceVersion;
+	}
 }
