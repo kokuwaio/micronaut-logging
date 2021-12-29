@@ -5,6 +5,24 @@ name: Build
   push: {}
 
 jobs:
+
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ibiqlik/action-yamllint@v3
+        with:
+          format: colored
+          strict: true
+
+  lint-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://avtodev/markdown-lint:v1
+        with:
+          args: /github/workspace
+
   build:
     runs-on: ubuntu-latest
     steps:
