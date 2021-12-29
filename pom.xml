@@ -177,11 +177,12 @@
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
-			<artifactId>logback-jackson</artifactId>
+			<artifactId>logback-json-classic</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
-			<artifactId>logback-json-classic</artifactId>
+			<artifactId>logback-jackson</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
