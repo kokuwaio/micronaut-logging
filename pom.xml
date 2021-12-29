@@ -71,6 +71,7 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.parameters>true</maven.compiler.parameters>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 
 		<!-- ===================================================================== -->
 		<!-- ============================= Versions ============================== -->
