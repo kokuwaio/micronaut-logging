@@ -21,8 +21,8 @@ logger:
       prefix: header.
       names:
         - x-request-id
-        - x-b3-traceId 
+        - x-b3-traceId
         - x-b3-parentspanid
         - x-b3-spanid
-        - x-b3-sampled 
+        - x-b3-sampled
 ```

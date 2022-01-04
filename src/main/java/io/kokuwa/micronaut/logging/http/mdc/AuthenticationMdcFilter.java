@@ -45,7 +45,7 @@ public class AuthenticationMdcFilter extends AbstractMdcFilter {
 		this.name = name.orElse(DEFAULT_NAME);
 		this.attributes = attributes.orElseGet(Set::of);
 		if (name.isPresent() || !this.attributes.isEmpty()) {
-			log.info("Configured with name {} and attributes {}", name, attributes);
+			log.info("Configured with name {} and attributes {}", this.name, this.attributes);
 		}
 	}
 
