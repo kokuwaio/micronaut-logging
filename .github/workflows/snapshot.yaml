@@ -1,4 +1,4 @@
-name: Build
+name: Snapshot
 
 "on":
   workflow_dispatch: {}
@@ -51,4 +51,3 @@ jobs:
           reporter: java-junit
           list-suites: failed
           list-tests: failed
-          fail-on-error: false
