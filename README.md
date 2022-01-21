@@ -4,6 +4,17 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.kokuwa.micronaut%22%20AND%20a:%22micronaut-logging%22)
 [![CI](https://img.shields.io/github/workflow/status/kokuwaio/micronaut-logging/Snapshot)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/snapshot.yaml)
 
+Include in your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>io.kokuwa.micronaut</groupId>
+  <artifactId>micronaut-logging</artifactId>
+  <version>${version.io.kokuwa.micronaut.logging}</version>
+  <scope>runtime</scope>
+</dependency>
+```
+
 ## Features
 
 * [set log level based on MDC values](docs/features/logback_mdc_level.md)
