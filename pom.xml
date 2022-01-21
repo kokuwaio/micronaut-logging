@@ -87,12 +87,12 @@
 
 		<version.org.apache.maven.plugins.clean>3.1.0</version.org.apache.maven.plugins.clean>
 		<version.org.apache.maven.plugins.checkstyle>3.1.2</version.org.apache.maven.plugins.checkstyle>
-		<version.org.apache.maven.plugins.compiler>3.8.1</version.org.apache.maven.plugins.compiler>
+		<version.org.apache.maven.plugins.compiler>3.9.0</version.org.apache.maven.plugins.compiler>
 		<version.org.apache.maven.plugins.deploy>3.0.0-M2</version.org.apache.maven.plugins.deploy>
 		<version.org.apache.maven.plugins.gpg>3.0.1</version.org.apache.maven.plugins.gpg>
 		<version.org.apache.maven.plugins.install>3.0.0-M1</version.org.apache.maven.plugins.install>
 		<version.org.apache.maven.plugins.javadoc>3.3.1</version.org.apache.maven.plugins.javadoc>
-		<version.org.apache.maven.plugins.jar>3.2.1</version.org.apache.maven.plugins.jar>
+		<version.org.apache.maven.plugins.jar>3.2.2</version.org.apache.maven.plugins.jar>
 		<version.org.apache.maven.plugins.release>3.0.0-M5</version.org.apache.maven.plugins.release>
 		<version.org.apache.maven.plugins.resources>3.2.0</version.org.apache.maven.plugins.resources>
 		<version.org.apache.maven.plugins.source>3.2.1</version.org.apache.maven.plugins.source>
@@ -106,7 +106,7 @@
 
 		<version.ch.qos.logback>1.2.10</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-		<version.io.micronaut>3.2.6</version.io.micronaut>
+		<version.io.micronaut>3.2.7</version.io.micronaut>
 
 	</properties>
 
