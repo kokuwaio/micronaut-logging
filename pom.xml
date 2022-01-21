@@ -55,6 +55,10 @@
 			<id>sonatype-nexus</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
+		<site>
+			<id>github</id>
+			<url>scm:git:https://github.com/kokuwaio/micronaut-logging.git</url>
+		</site>
 	</distributionManagement>
 
 	<properties>
@@ -93,11 +97,14 @@
 		<version.org.apache.maven.plugins.install>3.0.0-M1</version.org.apache.maven.plugins.install>
 		<version.org.apache.maven.plugins.javadoc>3.3.1</version.org.apache.maven.plugins.javadoc>
 		<version.org.apache.maven.plugins.jar>3.2.2</version.org.apache.maven.plugins.jar>
+		<version.org.apache.maven.plugins.project-info-reports>3.1.2</version.org.apache.maven.plugins.project-info-reports>
 		<version.org.apache.maven.plugins.release>3.0.0-M5</version.org.apache.maven.plugins.release>
 		<version.org.apache.maven.plugins.resources>3.2.0</version.org.apache.maven.plugins.resources>
+		<version.org.apache.maven.plugins.site>3.10.0</version.org.apache.maven.plugins.site>
 		<version.org.apache.maven.plugins.source>3.2.1</version.org.apache.maven.plugins.source>
 		<version.org.apache.maven.plugins.surefire>3.0.0-M5</version.org.apache.maven.plugins.surefire>
 		<version.org.codehaus.mojo.tidy>1.1.0</version.org.codehaus.mojo.tidy>
+		<version.org.jacoco>0.8.7</version.org.jacoco>
 		<version.org.sonatype.plugins.nexus-staging>1.6.8</version.org.sonatype.plugins.nexus-staging>
 		<version.com.puppycrawl.tools.checkstyle>9.2.1</version.com.puppycrawl.tools.checkstyle>
 		<version.io.kokuwa.checkstyle>0.5.6</version.io.kokuwa.checkstyle>
@@ -265,6 +272,11 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.project-info-reports}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${version.org.apache.maven.plugins.release}</version>
 					<configuration>
@@ -278,6 +290,11 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>${version.org.apache.maven.plugins.resources}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.site}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -298,6 +315,11 @@
 					<version>${version.org.codehaus.mojo.tidy}</version>
 				</plugin>
 				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${version.org.jacoco}</version>
+				</plugin>
+				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
 					<artifactId>nexus-staging-maven-plugin</artifactId>
 					<version>${version.org.sonatype.plugins.nexus-staging}</version>
@@ -305,6 +327,20 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+
+			<!-- measure test coverage -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- add source for downstream projects -->
 			<plugin>
@@ -344,9 +380,30 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-publish-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<pubScmUrl>${project.scm.developerConnection}</pubScmUrl>
+					<scmBranch>gh-pages</scmBranch>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<profiles>
 		<profile>
