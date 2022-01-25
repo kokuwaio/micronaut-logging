@@ -6,7 +6,7 @@ name: Snapshot
 
 jobs:
 
-  lint-yaml:
+  yaml:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
           format: colored
           strict: true
 
-  lint-markdown:
+  markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
