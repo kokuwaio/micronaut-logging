@@ -6,9 +6,9 @@ updates:
       interval: daily
     ignore:
       - dependency-name: ch.qos.logback:logback-classic
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-major","version-update:semver-minor"]
       - dependency-name: io.micronaut:micronaut-bom
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-major","version-update:semver-minor"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
