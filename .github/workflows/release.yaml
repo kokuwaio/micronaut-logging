@@ -20,6 +20,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
+          cache: maven
           server-id: sonatype-nexus
           server-username: SERVER_USERNAME
           server-password: SERVER_PASSWORD
