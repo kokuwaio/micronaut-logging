@@ -6,7 +6,7 @@ name: Snapshot
 
 jobs:
 
-  lint-yaml:
+  yaml:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
           format: colored
           strict: true
 
-  lint-markdown:
+  markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +47,7 @@ jobs:
         if: failure()
         with:
           name: surefire
-          path: '*/target/surefire-reports/*.xml'
+          path: '**/target/surefire-reports/*.xml'
           reporter: java-junit
           list-suites: failed
           list-tests: failed
