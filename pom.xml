@@ -106,7 +106,7 @@
 
 		<version.ch.qos.logback>1.2.10</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-		<version.io.micronaut>3.3.2</version.io.micronaut>
+		<version.io.micronaut>3.3.3</version.io.micronaut>
 
 	</properties>
 
