@@ -3,13 +3,11 @@ updates:
   - package-ecosystem: maven
     directory: /
     schedule:
-      interval: daily
-    open-pull-requests-limit: 1
-    rebase-strategy: auto
+      interval: monthly
     ignore:
       - dependency-name: ch.qos.logback:logback-classic
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: daily
+      interval: monthly
