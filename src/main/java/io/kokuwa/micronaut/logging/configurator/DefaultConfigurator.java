@@ -14,12 +14,12 @@ import ch.qos.logback.core.spi.ContextAwareBase;
 public class DefaultConfigurator extends ContextAwareBase implements Configurator {
 
 	@Override
-	public void configure(LoggerContext loggerContext) {
+	public ExecutionStatus configure(LoggerContext loggerContext) {
 
 		var base = DefaultConfigurator.class.getResource("/io/kokuwa/logback/logback-default.xml");
 		if (base == null) {
 			addError("Failed to find logback.xml from io.kokuwa:micronaut-logging");
-			return;
+			return ExecutionStatus.NEUTRAL;
 		}
 
 		try {
@@ -29,8 +29,10 @@ public class DefaultConfigurator extends ContextAwareBase implements Configurato
 			configurator.doConfigure(base);
 		} catch (JoranException e) {
 			addError("Failed to load logback.xml from io.kokuwa:micronaut-logging", e);
+			return ExecutionStatus.NEUTRAL;
 		}
 
 		loggerContext.getLogger("io.micronaut.logging.PropertiesLoggingLevelsConfigurer").setLevel(Level.WARN);
+		return ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY;
 	}
 }

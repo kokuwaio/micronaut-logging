@@ -8,9 +8,9 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.joran.JoranConstants;
 import ch.qos.logback.core.joran.action.Action;
-import ch.qos.logback.core.joran.action.ActionConst;
-import ch.qos.logback.core.joran.spi.InterpretationContext;
+import ch.qos.logback.core.joran.spi.SaxEventInterpretationContext;
 import io.micronaut.core.util.StringUtils;
 
 /**
@@ -29,9 +29,9 @@ public class RootAutoSelectAppenderAction extends Action {
 	private static final String LOGBACK_APPENDER = "LOGBACK_APPENDER";
 
 	@Override
-	public void begin(InterpretationContext ic, String name, Attributes attributes) {
+	public void begin(SaxEventInterpretationContext ic, String name, Attributes attributes) {
 
-		var rootLogger = LoggerContext.class.cast(context).getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
+		var rootLogger = LoggerContext.class.cast(ic).getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
 		var rootLoggerAppenders = rootLogger.iteratorForAppenders();
 		if (rootLoggerAppenders.hasNext()) {
 			addWarn("Skip because appender already found: " + rootLoggerAppenders.next().getName());
@@ -53,12 +53,11 @@ public class RootAutoSelectAppenderAction extends Action {
 	}
 
 	@Override
-	public void end(InterpretationContext ic, String name) {}
+	public void end(SaxEventInterpretationContext ic, String name) {}
 
-	private boolean setAppender(InterpretationContext ic, Logger rootLogger, String appenderName) {
+	private boolean setAppender(SaxEventInterpretationContext ic, Logger rootLogger, String appenderName) {
 
-		@SuppressWarnings("unchecked")
-		var appenderBag = (Map<String, Appender<ILoggingEvent>>) ic.getObjectMap().get(ActionConst.APPENDER_BAG);
+		var appenderBag = (Map<String, Appender<ILoggingEvent>>) ic.getContext().getObject(JoranConstants.APPENDER_BAG);
 		var appender = appenderBag.get(appenderName);
 		if (appender == null) {
 			addError("Could not find an appender named [" + appenderName

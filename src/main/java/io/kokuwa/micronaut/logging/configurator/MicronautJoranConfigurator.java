@@ -12,8 +12,8 @@ import ch.qos.logback.core.joran.spi.RuleStore;
 public class MicronautJoranConfigurator extends JoranConfigurator {
 
 	@Override
-	public void addInstanceRules(RuleStore rs) {
-		super.addInstanceRules(rs);
-		rs.addRule(new ElementSelector("configuration/root/autoAppender"), new RootAutoSelectAppenderAction());
+	public void addElementSelectorAndActionAssociations(RuleStore rs) {
+		super.addElementSelectorAndActionAssociations(rs);
+		rs.addRule(new ElementSelector("configuration/root/autoAppender"), () -> new RootAutoSelectAppenderAction());
 	}
 }
