@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -46,24 +45,14 @@ import jakarta.inject.Inject;
 @MicronautTest(rebuildContext = true)
 public abstract class AbstractFilterTest extends AbstractTest {
 
-	private static boolean INIT = false;
-
 	@Inject
 	SignatureGeneratorConfiguration signature;
 	@Inject
 	EmbeddedServer embeddedServer;
 
-	@DisplayName("0 init")
+	@DisplayName("0 - trigger rebuild of context")
 	@Test
-	@BeforeEach
-	void refresh() {
-		// https://github.com/micronaut-projects/micronaut-core/issues/5453#issuecomment-864594741
-		if (INIT) {
-			embeddedServer.refresh();
-		} else {
-			INIT = true;
-		}
-	}
+	void rebuild() {}
 
 	// security
 
