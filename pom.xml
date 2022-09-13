@@ -4,7 +4,7 @@
 
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>3.0.6-SNAPSHOT</version>
+	<version>4.0.0-SNAPSHOT</version>
 
 	<name>Logging Support for Micronaut</name>
 	<description>Enhanced logging using MDC or request header.</description>
@@ -105,9 +105,10 @@
 
 		<!-- dependencies -->
 
-		<version.ch.qos.logback>1.2.11</version.ch.qos.logback>
+		<version.ch.qos.logback>1.4.0</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.micronaut>3.6.1</version.io.micronaut>
+		<version.org.slf4j.api>2.0.0</version.org.slf4j.api>
 
 	</properties>
 
@@ -121,6 +122,13 @@
 				<version>${version.io.micronaut}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<!-- slf4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.org.slf4j.api}</version>
 			</dependency>
 
 			<!-- logback -->
@@ -193,7 +201,6 @@
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-jackson</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>

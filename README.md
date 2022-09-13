@@ -17,6 +17,8 @@ Include in your `pom.xml`:
 
 ## Features
 
+* Version [3.x](https://github.com/kokuwaio/micronaut-logging/tree/3.x) is based on SLF4J 1.7 & Logback 1.2
+* Version [4.x](https://github.com/kokuwaio/micronaut-logging/tree/main) is based on SLF4J 2.0 & Logback 1.4
 * [set log level based on MDC values](docs/features/logback_mdc_level.md)
 * [add default xml](docs/features/logback_default.md)
 * [preconfigured appender for different environments](docs/features/logback_appender.md)
@@ -33,5 +35,3 @@ Include in your `pom.xml`:
 
 * configure mdc on refresh event
 * read **serviceName** and **serviceVersion** from yaml
-* support auto select appender with custom `logback.xml`
-* add maven site with jacoco / dependency updates for snapshot build

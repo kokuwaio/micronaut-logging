@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true" scan="false">
 
-	<include resource="io/kokuwa/logback/base.xml" />
+	<include resource="io/kokuwa/logback/appender-console.xml" />
+	<include resource="io/kokuwa/logback/appender-json.xml" />
+	<include resource="io/kokuwa/logback/appender-gcp.xml" />
 
 	<logger name="io.micronaut.logging.PropertiesLoggingLevelsConfigurer" levels="WARN" />
 

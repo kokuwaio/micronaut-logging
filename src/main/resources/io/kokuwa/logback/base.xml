@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<included>
-
-	<include resource="io/kokuwa/logback/appender-console.xml" />
-	<include resource="io/kokuwa/logback/appender-json.xml" />
-	<include resource="io/kokuwa/logback/appender-gcp.xml" />
-
-</included>

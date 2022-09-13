@@ -4,14 +4,12 @@ If no `logback.xml` by user is provided a default [logback.xml](../../src/main/r
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true" scan="false">
-
- <include resource="io/kokuwa/logback/base.xml" />
+<configuration debug="false" scan="false">
 
  <logger name="io.micronaut.logging.PropertiesLoggingLevelsConfigurer" levels="WARN" />
 
  <root level="INFO">
-  <appender-ref ref="${LOGBACK_APPENDER:-CONSOLE}" />
+  <autoAppender />
  </root>
 
 </configuration>
