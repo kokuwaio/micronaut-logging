@@ -104,7 +104,7 @@
 
 		<version.ch.qos.logback>1.4.4</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-		<version.io.micronaut>3.7.3</version.io.micronaut>
+		<version.io.micronaut>3.7.4</version.io.micronaut>
 		<version.org.slf4j.api>2.0.3</version.org.slf4j.api>
 
 	</properties>
