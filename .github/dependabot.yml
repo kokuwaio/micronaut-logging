@@ -3,11 +3,22 @@ updates:
   - package-ecosystem: maven
     directory: /
     schedule:
-      interval: daily
+      interval: monthly
+      day: monday
+      # github parses time without quotes to int
+      # yamllint disable-line rule:quoted-strings
+      time: "09:00"
+      timezone: Europe/Berlin
     ignore:
+      # logback 1.3 and 1.4 are compatible with slf4j 2.x only
       - dependency-name: ch.qos.logback:logback-classic
         update-types: [version-update:semver-major, version-update:semver-minor]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+      day: monday
+      # github parses time without quotes to int
+      # yamllint disable-line rule:quoted-strings
+      time: "09:00"
+      timezone: Europe/Berlin
