@@ -1,7 +1,7 @@
 # Micronaut Logging support
 
 [![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/kokuwaio/micronaut-logging.svg?label=License)](http://www.apache.org/licenses/)
-[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.kokuwa.micronaut%22%20AND%20a:%22micronaut-logging%22)
+[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
 [![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=main&label=3.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3Amain)
 [![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=4.x&label=4.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3A4.x)
 
