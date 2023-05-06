@@ -28,10 +28,6 @@ Include in your `pom.xml`:
 * [add HTTP header to MDC](docs/features/http_mdc_header.md)
 * [add authentication information from HTTP request to MDC](docs/features/http_mdc_authentication.md)
 
-## Development
-
-* [build](docs/build.md)
-
 ## Open Topics
 
 * configure mdc on refresh event
