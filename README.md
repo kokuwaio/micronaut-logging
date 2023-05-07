@@ -16,6 +16,29 @@ Include in your `pom.xml`:
 </dependency>
 ```
 
+Or use in `dependencyManagement` in `pom.xml`:
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.kokuwa.micronaut</groupId>
+      <artifactId>micronaut-logging</artifactId>
+      <version>${version.io.kokuwa.micronaut.logging}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut</groupId>
+      <artifactId>micronaut-bom</artifactId>
+      <version>${version.io.micronaut}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+```
+
 ## Features
 
 * Version [3.x](https://github.com/kokuwaio/micronaut-logging/tree/main) is based on SLF4J 1.7 & Logback 1.2
