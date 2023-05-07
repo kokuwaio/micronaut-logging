@@ -17,9 +17,6 @@
         "pattern": "\\Qio/kokuwa/logback/logback-default.xml\\E"
       },
       {
-        "pattern": "\\Qio/kokuwa/logback/logback-example.xml\\E"
-      },
-      {
         "pattern": "\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
       }
     ]
