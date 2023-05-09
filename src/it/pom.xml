@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>@project.groupId@</groupId>
+	<artifactId>@project.artifactId@-it</artifactId>
+	<version>LOCAL-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>log-text</module>
+		<module>log-json-from-env</module>
+		<module>log-json-from-kubernetes</module>
+		<module>log-gcp-from-env</module>
+		<module>log-gcp-from-gcloud</module>
+		<module>level-from-micronaut</module>
+		<module>logback-xml-custom</module>
+	</modules>
+
+	<properties>
+
+		<!-- ===================================================================== -->
+		<!-- ============================== Build ================================ -->
+		<!-- ===================================================================== -->
+
+		<project.build.sourceEncoding>@project.build.sourceEncoding@</project.build.sourceEncoding>
+
+		<maven.compiler.source>@maven.compiler.source@</maven.compiler.source>
+		<maven.compiler.target>@maven.compiler.target@</maven.compiler.target>
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
+		<maven.test.redirectTestOutputToFile>false</maven.test.redirectTestOutputToFile>
+
+		<!-- ===================================================================== -->
+		<!-- ============================= Libaries ============================== -->
+		<!-- ===================================================================== -->
+
+		<!-- plugins -->
+
+		<version.org.apache.maven.plugins.compiler>@version.org.apache.maven.plugins.compiler@</version.org.apache.maven.plugins.compiler>
+		<version.org.apache.maven.plugins.install>@version.org.apache.maven.plugins.install@</version.org.apache.maven.plugins.install>
+		<version.org.apache.maven.plugins.jar>@version.org.apache.maven.plugins.jar@</version.org.apache.maven.plugins.jar>
+		<version.org.apache.maven.plugins.resources>@version.org.apache.maven.plugins.resources@</version.org.apache.maven.plugins.resources>
+		<version.org.apache.maven.plugins.surefire>@version.org.apache.maven.plugins.surefire@</version.org.apache.maven.plugins.surefire>
+
+		<!-- dependencies -->
+
+		<version.io.kokuwa.micronaut.logging>@version.io.kokuwa.micronaut.logging@</version.io.kokuwa.micronaut.logging>
+		<version.io.micronaut>@version.io.micronaut@</version.io.micronaut>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.kokuwa.micronaut</groupId>
+				<artifactId>micronaut-logging</artifactId>
+				<version>${version.io.kokuwa.micronaut.logging}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.micronaut</groupId>
+				<artifactId>micronaut-bom</artifactId>
+				<version>${version.io.micronaut}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+
+		<!-- micronaut -->
+		<dependency>
+			<groupId>io.micronaut</groupId>
+			<artifactId>micronaut-runtime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut.test</groupId>
+			<artifactId>micronaut-test-junit5</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.kokuwa.micronaut</groupId>
+			<artifactId>micronaut-logging</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.compiler}</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>io.micronaut</groupId>
+								<artifactId>micronaut-inject-java</artifactId>
+								<version>${version.io.micronaut}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.install}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.jar}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.resources}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.org.apache.maven.plugins.surefire}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+
+			<!-- remove default invocations -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-resources</id>
+						<phase />
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase />
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase />
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase />
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
