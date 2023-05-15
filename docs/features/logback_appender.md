@@ -12,5 +12,3 @@
 2. if GCP is detected gcp appender will be used
 3. if Kubernetes is detected json appender will be used
 4. console appender else
-
-*IMPORTENT*: only works without custom `logback.xml`

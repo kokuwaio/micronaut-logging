@@ -100,12 +100,12 @@
 
 		<!-- dependencies -->
 
-		<version.ch.qos.logback>1.2.12</version.ch.qos.logback>
+		<version.ch.qos.logback>1.4.7</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.kokuwa.micronaut.logging>4.0.0-SNAPSHOT</version.io.kokuwa.micronaut.logging>
 		<version.io.micronaut>3.9.1</version.io.micronaut>
 		<version.io.micronaut.security>	3.11.0</version.io.micronaut.security>
-		<version.org.slf4j.api>1.7.36</version.org.slf4j.api>
+		<version.org.slf4j.api>2.0.7</version.org.slf4j.api>
 
 	</properties>
 
@@ -223,7 +223,6 @@
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-jackson</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
@@ -370,6 +369,9 @@
 							<streamLogs>false</streamLogs>
 							<streamLogsOnFailures>true</streamLogsOnFailures>
 							<writeJunitReport>true</writeJunitReport>
+							<!-- logback 1.3+ is not supported by micronaut-->
+							<!-- https://github.com/micronaut-projects/micronaut-core/issues/8810 -->
+							<pomExcludes>level-from-micronaut/pom.xml</pomExcludes>
 						</configuration>
 					</execution>
 				</executions>
