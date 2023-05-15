@@ -70,21 +70,15 @@ public class RootAutoSelectAppenderAction extends Action {
 	private void setAppender(Logger rootLogger, String appenderName) {
 		addInfo("Use appender: " + appenderName);
 
-		Layout<ILoggingEvent> layout;
-		switch (appenderName) {
-			case APPENDER_JSON:
-				layout = json();
-				break;
-			case APPENDER_GCP:
-				layout = gcp();
-				break;
-			case APPENDER_CONSOLE:
-				layout = console();
-				break;
-			default:
+		Layout<ILoggingEvent> layout = switch (appenderName) {
+			case APPENDER_JSON -> json();
+			case APPENDER_GCP -> gcp();
+			case APPENDER_CONSOLE -> console();
+			default -> {
 				addError("Appender " + appenderName + " not found. Using console ...");
-				layout = console();
-		}
+				yield console();
+			}
+		};
 		layout.start();
 
 		var encoder = new LayoutWrappingEncoder<ILoggingEvent>();
