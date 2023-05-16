@@ -100,7 +100,7 @@
 
 		<!-- dependencies -->
 
-		<version.ch.qos.logback>1.2.12</version.ch.qos.logback>
+		<version.ch.qos.logback>1.4.7</version.ch.qos.logback>
 		<version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
 		<version.io.kokuwa.micronaut.logging>4.0.0-SNAPSHOT</version.io.kokuwa.micronaut.logging>
 		<version.io.micronaut>3.9.1</version.io.micronaut>
