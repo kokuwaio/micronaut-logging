@@ -6,10 +6,6 @@
 			<layout class="io.kokuwa.micronaut.logging.layout.GcpJsonLayout">
 				<serviceName>${SERVICE_NAME}</serviceName>
 				<serviceVersion>${SERVICE_VERSION}</serviceVersion>
-				<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
-				<appendLineSeparator>true</appendLineSeparator>
-				<includeMessage>true</includeMessage>
-				<includeContextName>false</includeContextName>
 			</layout>
 		</encoder>
 	</appender>
