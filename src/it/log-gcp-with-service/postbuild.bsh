@@ -1,0 +1,21 @@
+// verify log
+
+String expected = "^\\{\"time\":\"202[3-9]-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{0,3}Z\",\"severity\":\"INFO\",\"thread\":\"main\",\"logger\":\"io.kokuwa.micronaut.logging.LoggingTest\",\"message\":\"test-output-marker\",\"raw-message\":\"test-output-marker\",\"serviceContext\":\\{\"version\":\"0.1.2\",\"service\":\"test-service\"}}$";
+String[] logs = org.codehaus.plexus.util.FileUtils.fileRead(basedir + "/build.log").split("\n");
+
+for (String log : logs) {
+	if (!log.contains("test-output-marker")) {
+		continue;
+	}
+	if (java.util.regex.Pattern.matches(expected, log)) {
+		return true;
+	} else {
+		System.out.println("marker found, but formatting invalid:");
+		System.out.println("[EXPECTED] " + expected);
+		System.out.println("[ACTUAL]   " + log);
+		return false;
+	}
+}
+
+System.out.println("marker not found");
+return false;
