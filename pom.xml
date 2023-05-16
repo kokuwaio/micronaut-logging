@@ -163,12 +163,28 @@
 			<artifactId>micronaut-runtime</artifactId>
 			<version>${version.io.micronaut}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.security</groupId>
 			<artifactId>micronaut-security</artifactId>
 			<version>${version.io.micronaut}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>io.micronaut</groupId>
+					<artifactId>micronaut-http-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.micronaut</groupId>
+					<artifactId>micronaut-validation</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.test</groupId>

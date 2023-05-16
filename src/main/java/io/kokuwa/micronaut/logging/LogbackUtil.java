@@ -10,7 +10,6 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.turbo.TurboFilter;
 import io.micronaut.context.annotation.BootstrapContextCompatible;
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.annotation.Internal;
 import jakarta.inject.Singleton;
 
 /**
@@ -21,7 +20,6 @@ import jakarta.inject.Singleton;
 @Requires(classes = LoggerContext.class)
 @BootstrapContextCompatible
 @Singleton
-@Internal
 public class LogbackUtil {
 
 	private final LoggerContext context;

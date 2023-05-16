@@ -11,7 +11,6 @@ import io.micronaut.context.annotation.BootstrapContextCompatible;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.env.Environment;
-import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.type.Argument;
 import io.micronaut.core.util.StringUtils;
 
@@ -25,7 +24,6 @@ import io.micronaut.core.util.StringUtils;
 @Requires(property = MDCTurboFilterConfigurer.PREFIX + ".enabled", notEquals = StringUtils.FALSE)
 @BootstrapContextCompatible
 @Context
-@Internal
 public class MDCTurboFilterConfigurer {
 
 	public static final String PREFIX = "logger.mdc";
