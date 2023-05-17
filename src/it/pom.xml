@@ -61,12 +61,25 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+<!--
+			not yet released
 			<dependency>
 				<groupId>io.micronaut</groupId>
 				<artifactId>micronaut-bom</artifactId>
 				<version>${version.io.micronaut}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+-->
+			<dependency>
+				<groupId>io.micronaut</groupId>
+				<artifactId>micronaut-runtime</artifactId>
+				<version>${version.io.micronaut}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.micronaut.test</groupId>
+				<artifactId>micronaut-test-junit5</artifactId>
+				<version>${version.io.micronaut}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

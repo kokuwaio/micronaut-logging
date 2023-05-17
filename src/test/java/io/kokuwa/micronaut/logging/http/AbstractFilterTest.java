@@ -20,6 +20,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 
 import ch.qos.logback.classic.Level;
 import io.kokuwa.micronaut.logging.AbstractTest;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpHeaderValues;
 import io.micronaut.http.HttpRequest;
@@ -34,6 +35,7 @@ import io.micronaut.runtime.server.EmbeddedServer;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.token.jwt.signature.SignatureGeneratorConfiguration;
+import io.micronaut.serde.annotation.Serdeable;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 
@@ -118,6 +120,7 @@ public abstract class AbstractFilterTest extends AbstractTest {
 		}
 	}
 
+	@Serdeable
 	public static class TestResponse {
 
 		private final String path;
@@ -128,7 +131,7 @@ public abstract class AbstractFilterTest extends AbstractTest {
 		public TestResponse(
 				@JsonProperty("path") String path,
 				@JsonProperty("level") String level,
-				@JsonProperty("context") Map<String, String> context) {
+				@Nullable @JsonProperty("context") Map<String, String> context) {
 			this.path = path;
 			this.level = level;
 			this.context = context == null ? Map.of() : context;
