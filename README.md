@@ -2,8 +2,8 @@
 
 [![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/kokuwaio/micronaut-logging.svg?label=License)](http://www.apache.org/licenses/)
 [![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
-[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=main&label=3.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3Amain)
-[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=4.x&label=4.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3A4.x)
+[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=3.x&label=3.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3A3.x)
+[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=main&label=4.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3Amain)
 
 Include in your `pom.xml`:
 
@@ -41,8 +41,8 @@ Or use in `dependencyManagement` in `pom.xml`:
 
 ## Features
 
-* Version [3.x](https://github.com/kokuwaio/micronaut-logging/tree/main) is based on SLF4J 1.7 & Logback 1.2
-* Version [4.x](https://github.com/kokuwaio/micronaut-logging/tree/4.x) is based on SLF4J 2.0 & Logback 1.4 (WIP)
+* Version [3.x](https://github.com/kokuwaio/micronaut-logging/tree/3.x) is based on SLF4J 1.7 & Logback 1.2 & Micronaut 3.x
+* Version [4.x](https://github.com/kokuwaio/micronaut-logging/tree/main) is based on SLF4J 2.0 & Logback 1.4 & Micronaut 4.x
 * [set log level based on MDC values](docs/features/logback_mdc_level.md)
 * [add default xml](docs/features/logback_default.md)
 * [preconfigured appender for different environments](docs/features/logback_appender.md)

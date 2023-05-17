@@ -10,6 +10,17 @@ updates:
       # yamllint disable-line rule:quoted-strings
       time: "09:00"
       timezone: Europe/Berlin
+  - package-ecosystem: maven
+    directory: /
+    open-pull-requests-limit: 20
+    schedule:
+      interval: monthly
+      day: monday
+      # github parses time without quotes to int
+      # yamllint disable-line rule:quoted-strings
+      time: "09:00"
+      timezone: Europe/Berlin
+    target-branch: 3.x
     ignore:
       # logback 1.3 and 1.4 are compatible with slf4j 2.x only and not supported right now
       - dependency-name: ch.qos.logback:logback-classic
