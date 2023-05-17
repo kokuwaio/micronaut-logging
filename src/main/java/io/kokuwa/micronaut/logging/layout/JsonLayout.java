@@ -1,20 +1,24 @@
 package io.kokuwa.micronaut.logging.layout;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import ch.qos.logback.classic.pattern.ThrowableHandlingConverter;
 import ch.qos.logback.classic.pattern.ThrowableProxyConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.LayoutBase;
+import ch.qos.logback.core.status.OnConsoleStatusListener;
+import ch.qos.logback.core.status.StatusUtil;
+import ch.qos.logback.core.util.StatusListenerConfigHelper;
+import io.micronaut.context.exceptions.NoSuchBeanException;
 import io.micronaut.http.MediaType;
+import io.micronaut.json.JsonMapper;
 
 public class JsonLayout extends LayoutBase<ILoggingEvent> {
 
@@ -28,8 +32,6 @@ public class JsonLayout extends LayoutBase<ILoggingEvent> {
 	public static final String EXCEPTION_ATTR_NAME = "exception";
 	public static final String CONTEXT_ATTR_NAME = "context";
 
-	private final ObjectMapper mapper = new ObjectMapper();
-
 	protected boolean includeLevel = true;
 	protected boolean includeThreadName = true;
 	protected boolean includeMDC = true;
@@ -42,6 +44,7 @@ public class JsonLayout extends LayoutBase<ILoggingEvent> {
 	private String timestampFormat;
 	private String timestampFormatTimezoneId;
 	private ThrowableHandlingConverter throwableHandlingConverter = new ThrowableProxyConverter();
+	private JsonMapper mapper;
 
 	@Override
 	public String getContentType() {
@@ -63,9 +66,22 @@ public class JsonLayout extends LayoutBase<ILoggingEvent> {
 	@Override
 	public String doLayout(ILoggingEvent event) {
 		var map = toJsonMap(event);
+
+		if (mapper == null) {
+			try {
+				mapper = JsonMapper.createDefault();
+			} catch (NoSuchBeanException e) {
+				if (!StatusUtil.contextHasStatusListener(context)) {
+					addError("Failed to get object mapper from micronaut, please check your classpath");
+					StatusListenerConfigHelper.addOnConsoleListenerInstance(context, new OnConsoleStatusListener());
+				}
+				return map.toString() + CoreConstants.LINE_SEPARATOR;
+			}
+		}
+
 		try {
-			return mapper.writeValueAsString(map) + CoreConstants.LINE_SEPARATOR;
-		} catch (JsonProcessingException e) {
+			return new String(mapper.writeValueAsBytes(map), StandardCharsets.UTF_8) + CoreConstants.LINE_SEPARATOR;
+		} catch (IOException e) {
 			addError("Failed to write json from event " + event + " and map " + map, e);
 			return null;
 		}

@@ -101,10 +101,10 @@
 		<!-- dependencies -->
 
 		<version.ch.qos.logback>1.4.7</version.ch.qos.logback>
-		<version.com.fasterxml.jackson>2.15.0</version.com.fasterxml.jackson>
 		<version.io.kokuwa.micronaut.logging>4.0.0-SNAPSHOT</version.io.kokuwa.micronaut.logging>
 		<version.io.micronaut>4.0.0-M3</version.io.micronaut>
 		<version.io.micronaut.security>4.0.0-M3</version.io.micronaut.security>
+		<version.io.micronaut.serde>2.0.0-M6</version.io.micronaut.serde>
 		<version.org.slf4j.api>2.0.7</version.org.slf4j.api>
 		<version.org.yaml.snakeyaml>2.0</version.org.yaml.snakeyaml>
 
@@ -137,11 +137,6 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
 				<version>${version.ch.qos.logback}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${version.com.fasterxml.jackson}</version>
 			</dependency>
 
 		</dependencies>
@@ -186,6 +181,11 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>io.micronaut.serde</groupId>
+			<artifactId>micronaut-serde-api</artifactId>
+			<version>${version.io.micronaut.serde}</version>
+		</dependency>
+		<dependency>
 			<groupId>io.micronaut.test</groupId>
 			<artifactId>micronaut-test-junit5</artifactId>
 			<version>${version.io.micronaut}</version>
@@ -220,10 +220,6 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -270,6 +266,11 @@
 								<groupId>io.micronaut</groupId>
 								<artifactId>micronaut-inject-java</artifactId>
 								<version>${version.io.micronaut}</version>
+							</path>
+							<path>
+								<groupId>io.micronaut.serde</groupId>
+								<artifactId>micronaut-serde-processor</artifactId>
+								<version>${version.io.micronaut.serde}</version>
 							</path>
 						</annotationProcessorPaths>
 					</configuration>
