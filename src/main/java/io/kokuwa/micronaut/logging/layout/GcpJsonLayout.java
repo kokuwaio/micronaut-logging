@@ -1,12 +1,10 @@
 package io.kokuwa.micronaut.logging.layout;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.contrib.json.classic.JsonLayout;
 import io.micronaut.core.util.StringUtils;
 
 /**
@@ -44,7 +42,7 @@ public class GcpJsonLayout extends JsonLayout {
 
 	private void addServiceContext(Map<String, Object> map) {
 		if (serviceContext == null) {
-			serviceContext = new HashMap<>(2);
+			serviceContext = new LinkedHashMap<>(2);
 			if (StringUtils.isNotEmpty(serviceName) && !serviceName.endsWith(UNDEFINED)) {
 				serviceContext.put("service", serviceName);
 			}
