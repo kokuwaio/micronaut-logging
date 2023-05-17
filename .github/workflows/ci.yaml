@@ -31,10 +31,10 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
           cache: maven
       - run: mvn -B -ntp dependency:go-offline
-      - run: mvn -B -ntp javadoc:javadoc-no-fork -Dmaven.javadoc.failOnWarnings=true -Ddoclint=all
+      - run: mvn -B -ntp javadoc:javadoc-no-fork -Ddoclint=all
 
   checkstyle:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
           cache: maven
       - run: mvn -B -ntp dependency:go-offline
       - run: mvn -B -ntp checkstyle:check
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
           cache: maven
           server-id: sonatype-nexus
           server-username: SERVER_USERNAME

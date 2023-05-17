@@ -40,7 +40,7 @@ public class HeaderMdcFilter extends AbstractMdcFilter {
 			@Value("${" + PREFIX + ".prefix}") Optional<String> prefix,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
 		super(order.orElse(DEFAULT_ORDER), prefix.orElse(null));
-		this.headers = headers.stream().map(String::toLowerCase).collect(Collectors.toSet());
+		this.headers = headers.stream().map(String::toLowerCase).collect(Collectors.toUnmodifiableSet());
 		log.info("Configured with header names {}", headers);
 	}
 
@@ -48,9 +48,7 @@ public class HeaderMdcFilter extends AbstractMdcFilter {
 	public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
 		var mdc = new HashMap<String, String>();
 		for (var header : headers) {
-			request.getHeaders()
-					.getFirst(header)
-					.ifPresent(value -> mdc.put(header, String.valueOf(value)));
+			request.getHeaders().getFirst(header).ifPresent(value -> mdc.put(header, String.valueOf(value)));
 		}
 		return doFilter(request, chain, mdc);
 	}
