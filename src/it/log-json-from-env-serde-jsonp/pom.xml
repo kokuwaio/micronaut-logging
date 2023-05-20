@@ -8,5 +8,12 @@
 		<version>LOCAL-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>@project.artifactId@-it-log-json-from-env</artifactId>
+	<artifactId>@project.artifactId@-it-log-json-from-env-serde-jsonp</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.micronaut.serde</groupId>
+			<artifactId>micronaut-serde-jsonp</artifactId>
+		</dependency>
+	</dependencies>
 </project>
