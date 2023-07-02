@@ -30,12 +30,13 @@ public class RootAutoSelectAppenderAction extends Action {
 	private static final String APPENDER_GCP = "GCP";
 	private static final String LOGBACK_APPENDER = "LOGBACK_APPENDER";
 	private static final String LOGBACK_PATTERN = "LOGBACK_PATTERN";
-	private static final String LOGBACK_PATTERN_DEFAULT = "%cyan(%d{HH:mm:ss.SSS})"
-			+ " %gray(%-6.6thread)"
-			+ " %highlight(%-5level)"
-			+ " %magenta(%32logger{32})"
-			+ " %mdc"
-			+ " %msg%n";
+	private static final String LOGBACK_PATTERN_DEFAULT = """
+			%cyan(%d{HH:mm:ss.SSS}) \
+			%gray(%-6.6thread) \
+			%highlight(%-5level) \
+			%magenta(%32logger{32}) \
+			%mdc \
+			%msg%n""";
 
 	@Override
 	public void begin(SaxEventInterpretationContext ic, String name, org.xml.sax.Attributes attributes) {
@@ -70,21 +71,15 @@ public class RootAutoSelectAppenderAction extends Action {
 	private void setAppender(Logger rootLogger, String appenderName) {
 		addInfo("Use appender: " + appenderName);
 
-		Layout<ILoggingEvent> layout;
-		switch (appenderName) {
-			case APPENDER_JSON:
-				layout = json();
-				break;
-			case APPENDER_GCP:
-				layout = gcp();
-				break;
-			case APPENDER_CONSOLE:
-				layout = console();
-				break;
-			default:
+		var layout = switch (appenderName) {
+			case APPENDER_JSON -> json();
+			case APPENDER_GCP -> gcp();
+			case APPENDER_CONSOLE -> console();
+			default -> {
 				addError("Appender " + appenderName + " not found. Using console ...");
-				layout = console();
-		}
+				yield console();
+			}
+		};
 		layout.start();
 
 		var encoder = new LayoutWrappingEncoder<ILoggingEvent>();
