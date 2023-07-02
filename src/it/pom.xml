@@ -47,7 +47,7 @@
 
 		<!-- dependencies -->
 
-		<version.io.kokuwa.micronaut.logging>@version.io.kokuwa.micronaut.logging@</version.io.kokuwa.micronaut.logging>
+		<version.io.kokuwa.micronaut.logging>@project.version@</version.io.kokuwa.micronaut.logging>
 		<version.io.micronaut>@version.io.micronaut@</version.io.micronaut>
 
 	</properties>
@@ -58,8 +58,6 @@
 				<groupId>io.kokuwa.micronaut</groupId>
 				<artifactId>micronaut-logging</artifactId>
 				<version>${version.io.kokuwa.micronaut.logging}</version>
-				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.micronaut</groupId>
