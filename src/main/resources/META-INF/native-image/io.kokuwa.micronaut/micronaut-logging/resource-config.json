@@ -2,18 +2,6 @@
   "resources": {
     "includes": [
       {
-        "pattern": "\\Qio/kokuwa/logback/appender-console.xml\\E"
-      },
-      {
-        "pattern": "\\Qio/kokuwa/logback/appender-gcp.xml\\E"
-      },
-      {
-        "pattern": "\\Qio/kokuwa/logback/appender-json.xml\\E"
-      },
-      {
-        "pattern": "\\Qio/kokuwa/logback/base.xml\\E"
-      },
-      {
         "pattern": "\\Qio/kokuwa/logback/logback-default.xml\\E"
       },
       {
