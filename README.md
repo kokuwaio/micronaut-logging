@@ -2,8 +2,7 @@
 
 [![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/kokuwaio/micronaut-logging.svg?label=License)](http://www.apache.org/licenses/)
 [![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
-[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=main&label=3.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3Amain)
-[![CI](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/ci.yaml?branch=4.x&label=4.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/ci.yaml?query=branch%3A4.x)
+[![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?label=Build)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml)
 
 Include in your `pom.xml`:
 
@@ -14,29 +13,6 @@ Include in your `pom.xml`:
   <version>${version.io.kokuwa.micronaut.logging}</version>
   <scope>runtime</scope>
 </dependency>
-```
-
-Or use in `dependencyManagement` in `pom.xml`:
-
-```xml
-<dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>io.kokuwa.micronaut</groupId>
-      <artifactId>micronaut-logging</artifactId>
-      <version>${version.io.kokuwa.micronaut.logging}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-bom</artifactId>
-      <version>${version.io.micronaut}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
-  </dependencies>
-</dependencyManagement>
 ```
 
 ## Features
@@ -56,4 +32,3 @@ Or use in `dependencyManagement` in `pom.xml`:
 * configure mdc on refresh event
 * read **serviceName** and **serviceVersion** from yaml
 * support auto select appender with custom `logback.xml`
-* add maven site with jacoco / dependency updates for snapshot build
