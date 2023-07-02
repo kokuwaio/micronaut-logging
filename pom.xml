@@ -101,7 +101,7 @@
 		<!-- dependencies -->
 
 		<version.ch.qos.logback>1.2.12</version.ch.qos.logback>
-		<version.com.fasterxml.jackson>2.15.0</version.com.fasterxml.jackson>
+		<version.com.fasterxml.jackson>2.15.2</version.com.fasterxml.jackson>
 		<version.io.kokuwa.micronaut.logging>3.2.1-SNAPSHOT</version.io.kokuwa.micronaut.logging>
 		<version.io.micronaut>3.9.1</version.io.micronaut>
 		<version.io.micronaut.security>	3.11.0</version.io.micronaut.security>
