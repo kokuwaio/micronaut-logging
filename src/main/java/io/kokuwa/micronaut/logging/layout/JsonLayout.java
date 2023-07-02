@@ -90,7 +90,7 @@ public class JsonLayout extends LayoutBase<ILoggingEvent> {
 			var throwableProxy = value.getThrowableProxy();
 			if (throwableProxy != null) {
 				var ex = throwableHandlingConverter.convert(value);
-				if (ex != null && !ex.equals("")) {
+				if (ex != null && !ex.isEmpty()) {
 					map.put(fieldName, ex);
 				}
 			}

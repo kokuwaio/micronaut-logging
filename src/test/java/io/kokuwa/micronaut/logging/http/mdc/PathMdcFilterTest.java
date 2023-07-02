@@ -89,9 +89,9 @@ public class PathMdcFilterTest extends AbstractFilterTest {
 
 	@DisplayName("mdc: test for documentation example")
 	@Test
-	@Property(name = "logger.http.path.patterns", value = ""
-			+ "\\/gateway\\/(?<gatewayId>[a-f0-9\\-]{36}),"
-			+ "\\/gateway\\/(?<gatewayId>[a-f0-9\\-]{36})\\/configuration\\/(?<config>[a-z]+)")
+	@Property(name = "logger.http.path.patterns", value = """
+			\\/gateway\\/(?<gatewayId>[a-f0-9\\-]{36}),\
+			\\/gateway\\/(?<gatewayId>[a-f0-9\\-]{36})\\/configuration\\/(?<config>[a-z]+)""")
 	void mdcMatchExample() {
 		var uuid = UUID.randomUUID().toString();
 		assertContext(Map.of("gatewayId", uuid), "/gateway/" + uuid);

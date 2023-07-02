@@ -3,8 +3,6 @@ package io.kokuwa.micronaut.logging.http.mdc;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.reactivestreams.Publisher;
 
@@ -33,14 +31,14 @@ public class HeaderMdcFilter extends AbstractMdcFilter {
 	public static final String PREFIX = "logger.http.header";
 	public static final int DEFAULT_ORDER = ServerFilterPhase.FIRST.before();
 
-	private final Set<String> headers;
+	private final List<String> headers;
 
 	public HeaderMdcFilter(
 			@Value("${" + PREFIX + ".names}") List<String> headers,
 			@Value("${" + PREFIX + ".prefix}") Optional<String> prefix,
 			@Value("${" + PREFIX + ".order}") Optional<Integer> order) {
 		super(order.orElse(DEFAULT_ORDER), prefix.orElse(null));
-		this.headers = headers.stream().map(String::toLowerCase).collect(Collectors.toSet());
+		this.headers = headers.stream().map(String::toLowerCase).toList();
 		log.info("Configured with header names {}", headers);
 	}
 
@@ -48,9 +46,7 @@ public class HeaderMdcFilter extends AbstractMdcFilter {
 	public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
 		var mdc = new HashMap<String, String>();
 		for (var header : headers) {
-			request.getHeaders()
-					.getFirst(header)
-					.ifPresent(value -> mdc.put(header, String.valueOf(value)));
+			request.getHeaders().getFirst(header).ifPresent(value -> mdc.put(header, String.valueOf(value)));
 		}
 		return doFilter(request, chain, mdc);
 	}
