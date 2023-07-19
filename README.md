@@ -14,6 +14,12 @@ Include in your `pom.xml`:
   <version>${version.io.kokuwa.micronaut.logging}</version>
   <scope>runtime</scope>
 </dependency>
+<dependency>
+  <!-- you can replace jsonp with jackson if you prefer jackson -->
+  <groupId>io.micronaut.serde</groupId>
+  <artifactId>micronaut-serde-jsonp</artifactId>
+  <scope>runtime</scope>
+</dependency>
 ```
 
 ## Features

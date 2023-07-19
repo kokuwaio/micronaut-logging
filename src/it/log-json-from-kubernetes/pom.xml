@@ -9,4 +9,11 @@
 	</parent>
 
 	<artifactId>@project.artifactId@-it-log-json-from-kubernetes</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.micronaut.serde</groupId>
+			<artifactId>micronaut-serde-jsonp</artifactId>
+		</dependency>
+	</dependencies>
 </project>

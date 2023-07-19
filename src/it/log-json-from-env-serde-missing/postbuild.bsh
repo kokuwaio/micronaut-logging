@@ -1,0 +1,5 @@
+// verify log
+
+return org.codehaus.plexus.util.FileUtils
+  .fileRead(basedir + "/build.log")
+  .contains("Failed to get object mapper from micronaut, please check your classpath");
