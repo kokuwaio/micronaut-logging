@@ -1,9 +1,8 @@
 # Micronaut Logging support
 
-[![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/kokuwaio/micronaut-logging.svg?label=License)](http://www.apache.org/licenses/)
-[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
-[![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?branch=3.x&label=3.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml?query=branch%3A3.x)
-[![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?branch=main&label=4.x)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml?query=branch%3Amain)
+[![Apache License 2.0](https://img.shields.io/github/license/kokuwaio/helm-maven-plugin)](https://github.com/kokuwaio/micronaut-logging/blob/main/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
+[![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?branch=main)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml?query=branch%3Amain)
 
 Include in your `pom.xml`:
 
