@@ -1,6 +1,6 @@
 # Micronaut Logging support
 
-[![Apache License 2.0](https://img.shields.io/github/license/kokuwaio/helm-maven-plugin)](https://github.com/kokuwaio/micronaut-logging/blob/main/LICENSE)
+[![Apache License 2.0](https://img.shields.io/github/license/kokuwaio/micronaut-logging)](https://github.com/kokuwaio/micronaut-logging/blob/main/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
 [![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?branch=main)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml?query=branch%3Amain)
 

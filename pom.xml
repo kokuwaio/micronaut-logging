@@ -65,13 +65,13 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 
+		<invoker.parallelThreads>1C</invoker.parallelThreads>
+
 		<!-- ===================================================================== -->
 		<!-- ============================= Versions ============================== -->
 		<!-- ===================================================================== -->
 
 		<version.io.micronaut>4.0.0</version.io.micronaut>
-		<version.org.slf4j>2.0.7</version.org.slf4j>
-		<version.ch.qos.logback>1.4.8</version.ch.qos.logback>
 
 	</properties>
 
@@ -83,21 +83,6 @@
 				<version>${version.io.micronaut}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${version.org.slf4j}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${version.ch.qos.logback}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${version.ch.qos.logback}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -200,9 +185,6 @@
 							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
-						<configuration>
-							<parallelThreads>0.5C</parallelThreads>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

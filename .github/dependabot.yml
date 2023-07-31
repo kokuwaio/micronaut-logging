@@ -3,19 +3,23 @@ updates:
   - package-ecosystem: maven
     directory: /
     schedule:
+      interval: daily
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
       interval: monthly
       day: monday
+  - package-ecosystem: maven
+    directory: /
+    target-branch: 3.x
+    schedule:
+      interval: daily
     ignore:
-      # logback 1.3 and 1.4 are compatible with slf4j 2.x only and not supported right now
-      - dependency-name: ch.qos.logback:logback-classic
-        update-types: [version-update:semver-major, version-update:semver-minor]
-      - dependency-name: org.slf4j:slf4j-api
-        update-types: [version-update:semver-major]
-      # micronaut 4 will ship logback 1.4
       - dependency-name: io.micronaut:*
         update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
+    target-branch: 3.x
     schedule:
       interval: monthly
       day: monday
