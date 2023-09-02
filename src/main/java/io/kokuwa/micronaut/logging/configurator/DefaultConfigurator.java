@@ -13,6 +13,7 @@ import ch.qos.logback.core.spi.ContextAwareBase;
  */
 public class DefaultConfigurator extends ContextAwareBase implements Configurator {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public ExecutionStatus configure(LoggerContext loggerContext) {
 
