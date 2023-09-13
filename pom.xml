@@ -71,7 +71,7 @@
 		<!-- ============================= Versions ============================== -->
 		<!-- ===================================================================== -->
 
-		<version.io.micronaut>4.1.0</version.io.micronaut>
+		<version.io.micronaut>4.1.1</version.io.micronaut>
 
 	</properties>
 
