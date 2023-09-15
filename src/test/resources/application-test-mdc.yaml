@@ -1,4 +1,6 @@
 logger:
+  levels:
+    io.micronaut.logging.PropertiesLoggingLevelsConfigurer: "OFF"
   mdc:
     key1:
       key: key
