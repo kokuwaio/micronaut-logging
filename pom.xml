@@ -69,7 +69,7 @@
 		<!-- ============================= Versions ============================== -->
 		<!-- ===================================================================== -->
 
-		<version.io.micronaut>3.10.2</version.io.micronaut>
+		<version.io.micronaut>3.10.3</version.io.micronaut>
 
 	</properties>
 
