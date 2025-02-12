@@ -7,12 +7,13 @@ for (String log : logs) {
 	if (!log.contains("test-output-marker")) {
 		continue;
 	}
-	if (java.util.regex.Pattern.matches(expected, log)) {
+	if (java.util.regex.Pattern.matches(expected, log.replaceAll("\u001B\\[[;\\d]*m", ""))) {
 		return true;
 	} else {
 		System.out.println("marker found, but formatting invalid:");
 		System.out.println("[EXPECTED] " + expected);
 		System.out.println("[ACTUAL]   " + log);
+		System.out.println("[BASE64]   " + Base64.getEncoder().encodeToString(log.getBytes()));
 		return false;
 	}
 }
