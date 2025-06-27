@@ -7,18 +7,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import jakarta.inject.Inject;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
+import ch.qos.logback.classic.Level;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.JWTClaimsSet;
-
-import ch.qos.logback.classic.Level;
 import io.kokuwa.micronaut.logging.AbstractTest;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.CollectionUtils;
@@ -37,7 +38,6 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.security.token.jwt.signature.SignatureGeneratorConfiguration;
 import io.micronaut.serde.annotation.Serdeable;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import jakarta.inject.Inject;
 
 /**
  * Test for {@link HttpServerFilter}.

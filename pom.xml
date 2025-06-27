@@ -2,20 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>io.kokuwa.maven</groupId>
-		<artifactId>maven-parent</artifactId>
-		<version>0.6.18</version>
-		<relativePath />
-	</parent>
-
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>4.0.2-SNAPSHOT</version>
+	<version>5.0.0-SNAPSHOT</version>
 
 	<name>Logging Support for Micronaut</name>
 	<description>Enhanced logging using MDC or request header.</description>
-	<url>https://github.com/kokuwaio/micronaut-logging</url>
+	<url>https://git.kokuwa.io/kokuwaio/micronaut-logging</url>
 	<inceptionYear>2020</inceptionYear>
 	<organization>
 		<name>Kokuwa.io</name>
@@ -23,55 +16,47 @@
 	</organization>
 	<licenses>
 		<license>
-			<name>Apache-2.0</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<name>EUPL-1.2</name>
+			<url>https://eupl.eu/1.2/en</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
 
 	<developers>
 		<developer>
-			<id>sschnabe</id>
+			<id>stephan.schnabel</id>
 			<name>Stephan Schnabel</name>
-			<email>stephan@grayc.de</email>
-			<url>https://github.com/sschnabe</url>
-			<organization>GrayC GmbH</organization>
-			<organizationUrl>https://grayc.de</organizationUrl>
+			<url>https://schnabel.org</url>
+			<email>stephan@schnabel.org</email>
 			<timezone>Europe/Berlin</timezone>
 		</developer>
 	</developers>
 
 	<scm>
-		<url>https://github.com/kokuwaio/micronaut-logging</url>
-		<connection>scm:git:https://github.com/kokuwaio/micronaut-logging.git</connection>
-		<developerConnection>scm:git:https://github.com/kokuwaio/micronaut-logging.git</developerConnection>
+		<url>https://git.kokuwa.io/kokuwaio/micronaut-logging</url>
+		<connection>scm:git:https://git.kokuwa.io/kokuwaio/micronaut-logging.git</connection>
+		<developerConnection>scm:git:https://git.kokuwa.io/kokuwaio/micronaut-logging.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/kokuwaio/micronaut-logging/issues</url>
+		<system>forgejo</system>
+		<url>https://git.kokuwa.io/kokuwaio/micronaut-logging/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>github</system>
-		<url>https://github.com/kokuwaio/micronaut-logging/actions</url>
+		<system>woodpecker</system>
+		<url>https://ci.kokuwa.io/repos/kokuwaio/micronaut-logging</url>
 	</ciManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype.org</id>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<properties>
-
-		<!-- ===================================================================== -->
-		<!-- ============================== Build ================================ -->
-		<!-- ===================================================================== -->
-
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.implicit>class</maven.compiler.implicit>
-
-		<!-- ===================================================================== -->
-		<!-- ============================= Versions ============================== -->
-		<!-- ===================================================================== -->
-
-		<version.io.micronaut>4.9.0</version.io.micronaut>
-
+		<project.build.outputTimestamp>2025-06-27T00:00:00Z</project.build.outputTimestamp>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 
 	<dependencyManagement>
@@ -79,7 +64,7 @@
 			<dependency>
 				<groupId>io.micronaut.platform</groupId>
 				<artifactId>micronaut-platform</artifactId>
-				<version>${version.io.micronaut}</version>
+				<version>4.9.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -156,22 +141,119 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>verify</defaultGoal>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.14.0</version>
+					<configuration>
+						<implicit>class</implicit>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<failOnWarning>true</failOnWarning>
+						<compilerArgument>-Xlint:all,-processing</compilerArgument>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>io.micronaut</groupId>
+								<artifactId>micronaut-inject-java</artifactId>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.1.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>3.2.7</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>3.1.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>3.9.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.4.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.11.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>3.1.1</version>
+					<configuration>
+						<preparationGoals>verify</preparationGoals>
+						<preparationProfiles>check</preparationProfiles>
+						<goals>deploy</goals>
+						<releaseProfiles>deploy,release</releaseProfiles>
+						<signTag>true</signTag>
+						<scmReleaseCommitComment>@{prefix} prepare release @{releaseLabel} [CI SKIP]</scmReleaseCommitComment>
+						<tagNameFormat>@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.3.1</version>
+					<configuration>
+						<propertiesEncoding>ISO-8859-1</propertiesEncoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.5.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>tidy-maven-plugin</artifactId>
+					<version>1.4.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.central</groupId>
+					<artifactId>central-publishing-maven-plugin</artifactId>
+					<version>0.8.0</version>
+				</plugin>
+				<plugin>
+					<groupId>net.revelc.code.formatter</groupId>
+					<artifactId>formatter-maven-plugin</artifactId>
+					<version>2.27.0</version>
+					<configuration>
+						<configFile>${project.basedir}/src/eclipse/formatter.xml</configFile>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>net.revelc.code</groupId>
+					<artifactId>impsort-maven-plugin</artifactId>
+					<version>1.12.0</version>
+					<configuration>
+						<removeUnused>true</removeUnused>
+						<groups>java.,javax.,jakarta.,org.</groups>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
-
-			<!-- adjust micronaut -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>io.micronaut</groupId>
-							<artifactId>micronaut-inject-java</artifactId>
-							<version>${version.io.micronaut}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
 
 			<!-- run invoker tests -->
 			<plugin>
@@ -184,10 +266,201 @@
 							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
+						<configuration>
+							<cloneProjectsTo>${project.build.directory}/its</cloneProjectsTo>
+							<mergeUserSettings>true</mergeUserSettings>
+							<goals>test</goals>
+							<streamLogs>false</streamLogs>
+							<streamLogsOnFailures>true</streamLogsOnFailures>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- disable default executions -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase />
 					</execution>
 				</executions>
 			</plugin>
 
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<property>
+					<name>!env.CI</name>
+				</property>
+			</activation>
+			<properties>
+				 <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>tidy-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>pom</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.revelc.code</groupId>
+						<artifactId>impsort-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>sort</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.revelc.code.formatter</groupId>
+						<artifactId>formatter-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>format</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>check</id>
+			<activation>
+				<property>
+					<name>env.CI</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>tidy-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.revelc.code</groupId>
+						<artifactId>impsort-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.revelc.code.formatter</groupId>
+						<artifactId>formatter-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>validate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>deploy</id>
+			<activation>
+				<property>
+					<name>env.CI</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+
+					<!-- add source/javadoc -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- sign before upload -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<signer>bc</signer>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<configuration>
+							<publishingServerId>sonatype.org</publishingServerId>
+							<autoPublish>true</autoPublish>
+							<waitUntil>published</waitUntil>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

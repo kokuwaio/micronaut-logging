@@ -3,6 +3,9 @@ package io.kokuwa.micronaut.logging.http.level;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 import org.reactivestreams.Publisher;
 
 import ch.qos.logback.classic.turbo.TurboFilter;
@@ -17,8 +20,6 @@ import io.micronaut.http.annotation.Filter;
 import io.micronaut.http.filter.ServerFilterChain;
 import io.micronaut.http.filter.ServerFilterPhase;
 import io.micronaut.runtime.context.scope.Refreshable;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 
 /**
  * Http request logging filter.

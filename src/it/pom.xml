@@ -18,38 +18,9 @@
 	</modules>
 
 	<properties>
-
-		<!-- ===================================================================== -->
-		<!-- ============================== Build ================================ -->
-		<!-- ===================================================================== -->
-
-		<project.build.sourceEncoding>@project.build.sourceEncoding@</project.build.sourceEncoding>
-
-		<maven.compiler.source>@maven.compiler.source@</maven.compiler.source>
-		<maven.compiler.target>@maven.compiler.target@</maven.compiler.target>
-		<maven.compiler.parameters>true</maven.compiler.parameters>
-		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-		<maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
-		<maven.test.redirectTestOutputToFile>false</maven.test.redirectTestOutputToFile>
-
-		<!-- ===================================================================== -->
-		<!-- ============================= Libaries ============================== -->
-		<!-- ===================================================================== -->
-
-		<!-- plugins -->
-
-		<version.org.apache.maven.plugins.compiler>@version.org.apache.maven.plugins.compiler@</version.org.apache.maven.plugins.compiler>
-		<version.org.apache.maven.plugins.install>@version.org.apache.maven.plugins.install@</version.org.apache.maven.plugins.install>
-		<version.org.apache.maven.plugins.jar>@version.org.apache.maven.plugins.jar@</version.org.apache.maven.plugins.jar>
-		<version.org.apache.maven.plugins.resources>@version.org.apache.maven.plugins.resources@</version.org.apache.maven.plugins.resources>
-		<version.org.apache.maven.plugins.surefire>@version.org.apache.maven.plugins.surefire@</version.org.apache.maven.plugins.surefire>
-
-		<!-- dependencies -->
-
-		<version.io.kokuwa.micronaut.logging>@project.version@</version.io.kokuwa.micronaut.logging>
-		<version.io.micronaut>@version.io.micronaut@</version.io.micronaut>
-
+		<project.build.outputTimestamp>2025-06-27T00:00:00Z</project.build.outputTimestamp>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 
 	<dependencyManagement>
@@ -57,12 +28,12 @@
 			<dependency>
 				<groupId>io.kokuwa.micronaut</groupId>
 				<artifactId>micronaut-logging</artifactId>
-				<version>${version.io.kokuwa.micronaut.logging}</version>
+				<version>@project.version@</version>
 			</dependency>
 			<dependency>
 				<groupId>io.micronaut.platform</groupId>
 				<artifactId>micronaut-platform</artifactId>
-				<version>${version.io.micronaut}</version>
+				<version>4.9.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -95,36 +66,30 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${version.org.apache.maven.plugins.compiler}</version>
+					<version>3.14.0</version>
 					<configuration>
+						<implicit>class</implicit>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<failOnWarning>true</failOnWarning>
+						<compilerArgument>-Xlint:all,-processing</compilerArgument>
 						<annotationProcessorPaths>
 							<path>
 								<groupId>io.micronaut</groupId>
 								<artifactId>micronaut-inject-java</artifactId>
-								<version>${version.io.micronaut}</version>
 							</path>
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>${version.org.apache.maven.plugins.install}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${version.org.apache.maven.plugins.jar}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>${version.org.apache.maven.plugins.resources}</version>
+					<version>3.3.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${version.org.apache.maven.plugins.surefire}</version>
+					<version>3.5.3</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -147,26 +112,6 @@
 				<executions>
 					<execution>
 						<id>default-compile</id>
-						<phase />
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-jar</id>
-						<phase />
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-install</id>
 						<phase />
 					</execution>
 				</executions>

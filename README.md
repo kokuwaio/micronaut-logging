@@ -1,8 +1,12 @@
 # Micronaut Logging support
 
-[![Apache License 2.0](https://img.shields.io/github/license/kokuwaio/micronaut-logging)](https://github.com/kokuwaio/micronaut-logging/blob/main/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging)](https://central.sonatype.com/namespace/io.kokuwa.micronaut)
-[![Build](https://img.shields.io/github/actions/workflow/status/kokuwaio/micronaut-logging/build.yaml?branch=main)](https://github.com/kokuwaio/micronaut-logging/actions/workflows/build.yaml?query=branch%3Amain)
+Enhanced logging for Micronaut using MDC or request header.
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.kokuwa.micronaut/micronaut-logging)
+[![license](https://img.shields.io/badge/License-EUPL%201.2-blue)](https://git.kokuwa.io/kokuwaio/micronaut-logging/src/branch/main/LICENSE)
+[![prs](https://img.shields.io/gitea/pull-requests/open/kokuwaio/micronaut-logging?gitea_url=https%3A%2F%2Fgit.kokuwa.io)](https://git.kokuwa.io/kokuwaio/micronaut-logging/pulls)
+[![issues](https://img.shields.io/gitea/issues/open/kokuwaio/micronaut-logging?gitea_url=https%3A%2F%2Fgit.kokuwa.io)](https://git.kokuwa.io/kokuwaio/micronaut-logging/issues)
+[![build](https://ci.kokuwa.io/api/badges/kokuwaio/micronaut-logging/status.svg)](https://ci.kokuwa.io/repos/kokuwaio/micronaut-logging/)
 
 Include in your `pom.xml`:
 

@@ -4,13 +4,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import jakarta.inject.Singleton;
+
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.turbo.TurboFilter;
 import io.micronaut.context.annotation.BootstrapContextCompatible;
 import io.micronaut.context.annotation.Requires;
-import jakarta.inject.Singleton;
 
 /**
  * Utility class for Logback operations.

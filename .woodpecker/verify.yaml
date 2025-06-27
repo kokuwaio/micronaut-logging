@@ -1,0 +1,9 @@
+when:
+  event: [manual, pull_request]
+  path: [.woodpecker/verify.yaml, pom.xml, src/**]
+
+steps:
+
+  test:
+    image: maven:3.9.10-eclipse-temurin-17
+    commands: mvn verify --settings=.woodpecker/maven/settings.xml

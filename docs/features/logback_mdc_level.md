@@ -7,7 +7,7 @@ This can be used to change the log level based on MDC valus. E.g. change log lev
 Property | Description | Default
 -------- | ----------- | -------
 `logger.mdc.enabled` | MDC enabled? | `true`
-`logger.mdc.<key>` | MDC key to use |
+`logger.mdc.<key>` | MDC key to use | ``
 `logger.mdc.<key>.key` | MDC key override, see complex example below for usage | `<key>`
 `logger.mdc.<key>.level` | log level to use | `TRACE`
 `logger.mdc.<key>.loggers` | passlist of logger names, matches all loggers if empty | `[]`

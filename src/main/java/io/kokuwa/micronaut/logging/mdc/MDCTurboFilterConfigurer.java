@@ -46,7 +46,7 @@ public class MDCTurboFilterConfigurer implements LoggingSystem {
 	}
 
 	@Override
-	public void refresh() {
+	public final void refresh() {
 
 		mdcs = environment.getPropertyEntries(PREFIX);
 		initialized = false;
