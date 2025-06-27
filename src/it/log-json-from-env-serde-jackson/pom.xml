@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>@project.groupId@</groupId>
-		<artifactId>@project.artifactId@-it</artifactId>
+		<groupId>io.kokuwa.micronaut</groupId>
+		<artifactId>mirconaut-logging-it</artifactId>
 		<version>LOCAL-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>@project.artifactId@-it-log-json-from-env-serde-jackson</artifactId>
+	<artifactId>mirconaut-logging-it-log-json-from-env-serde-jackson</artifactId>
 
 	<dependencies>
 		<dependency>

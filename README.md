@@ -2,10 +2,10 @@
 
 Enhanced logging for Micronaut using MDC or request header.
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.kokuwa.micronaut/micronaut-logging)
-[![license](https://img.shields.io/badge/License-EUPL%201.2-blue)](https://git.kokuwa.io/kokuwaio/micronaut-logging/src/branch/main/LICENSE)
-[![prs](https://img.shields.io/gitea/pull-requests/open/kokuwaio/micronaut-logging?gitea_url=https%3A%2F%2Fgit.kokuwa.io)](https://git.kokuwa.io/kokuwaio/micronaut-logging/pulls)
+[![maven](https://img.shields.io/maven-central/v/io.kokuwa.micronaut/micronaut-logging.svg?label=maven)](https://central.sonatype.com/artifact/io.kokuwa.micronaut/micronaut-logging)
+[![license](https://img.shields.io/badge/license-EUPL%201.2-blue)](https://git.kokuwa.io/kokuwaio/micronaut-logging/src/branch/main/LICENSE)
 [![issues](https://img.shields.io/gitea/issues/open/kokuwaio/micronaut-logging?gitea_url=https%3A%2F%2Fgit.kokuwa.io)](https://git.kokuwa.io/kokuwaio/micronaut-logging/issues)
+[![prs](https://img.shields.io/gitea/pull-requests/open/kokuwaio/micronaut-logging?gitea_url=https%3A%2F%2Fgit.kokuwa.io)](https://git.kokuwa.io/kokuwaio/micronaut-logging/pulls)
 [![build](https://ci.kokuwa.io/api/badges/kokuwaio/micronaut-logging/status.svg)](https://ci.kokuwa.io/repos/kokuwaio/micronaut-logging/)
 
 Include in your `pom.xml`:
