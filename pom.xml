@@ -4,7 +4,7 @@
 
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>5.0.0-SNAPSHOT</version>
+	<version>5.0.0</version>
 
 	<name>Logging Support for Micronaut</name>
 	<description>Enhanced logging using MDC or request header.</description>
@@ -36,7 +36,7 @@
 		<url>https://git.kokuwa.io/kokuwaio/micronaut-logging</url>
 		<connection>scm:git:https://git.kokuwa.io/kokuwaio/micronaut-logging.git</connection>
 		<developerConnection>scm:git:https://git.kokuwa.io/kokuwaio/micronaut-logging.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>5.0.0</tag>
 	</scm>
 	<issueManagement>
 		<system>forgejo</system>
@@ -54,7 +54,7 @@
 	</distributionManagement>
 
 	<properties>
-		<project.build.outputTimestamp>2025-06-27T00:00:00Z</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2025-06-27T18:09:08Z</project.build.outputTimestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
