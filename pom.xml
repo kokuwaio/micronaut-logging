@@ -197,9 +197,7 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>3.1.1</version>
 					<configuration>
-						<preparationGoals>verify</preparationGoals>
 						<preparationProfiles>check</preparationProfiles>
-						<goals>deploy</goals>
 						<releaseProfiles>deploy,release</releaseProfiles>
 						<signTag>true</signTag>
 						<scmReleaseCommitComment>@{prefix} prepare release @{releaseLabel} [CI SKIP]</scmReleaseCommitComment>
@@ -394,11 +392,6 @@
 		</profile>
 		<profile>
 			<id>deploy</id>
-			<activation>
-				<property>
-					<name>env.CI</name>
-				</property>
-			</activation>
 			<build>
 				<plugins>
 

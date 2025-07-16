@@ -1,6 +1,6 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["local>kokuwaio/renovate-config", ":reviewer(stephan.schnabel)"],
+	"extends": ["kokuwaio/renovate-config"],
 	"packageRules": [{
 		"matchPackageNames": ["io.kokuwa.micronaut:mirconaut-logging-it"],
 		"enabled": false

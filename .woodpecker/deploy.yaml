@@ -9,7 +9,7 @@ steps:
 
   maven:
     image: maven:3.9.10-eclipse-temurin-17
-    commands: mvn deploy --settings=.woodpecker/maven/settings.xml
+    commands: mvn deploy -Pdeploy --settings=.woodpecker/maven/settings.xml
     environment:
       MAVEN_GPG_KEY: {from_secret: woodpecker_gpg_key}
       SONATYPE_ORG_USERNAME: {from_secret: sonatype_org_username}
