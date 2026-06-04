@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.kokuwa.micronaut</groupId>
 	<artifactId>micronaut-logging</artifactId>
-	<version>5.0.1-SNAPSHOT</version>
+	<version>5.1.0-SNAPSHOT</version>
 
 	<name>Logging Support for Micronaut</name>
 	<description>Enhanced logging using MDC or request header.</description>
@@ -56,7 +56,7 @@
 	<properties>
 		<project.build.outputTimestamp>2025-06-27T18:11:48Z</project.build.outputTimestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.release>25</maven.compiler.release>
 	</properties>
 
 	<dependencyManagement>
@@ -153,7 +153,7 @@
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
 						<failOnWarning>true</failOnWarning>
-						<compilerArgument>-Xlint:all,-processing</compilerArgument>
+						<compilerArgument>-Xlint:all,-processing,-classfile</compilerArgument>
 						<annotationProcessorPaths>
 							<path>
 								<groupId>io.micronaut</groupId>
@@ -248,6 +248,14 @@
 						<removeUnused>true</removeUnused>
 						<groups>java.,javax.,jakarta.,org.</groups>
 					</configuration>
+					<dependencies>
+						<!-- updated to support java25 -->
+						<dependency>
+							<groupId>com.github.javaparser</groupId>
+							<artifactId>javaparser-core</artifactId>
+							<version>3.28.2</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -299,7 +307,7 @@
 				</property>
 			</activation>
 			<properties>
-				 <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+				<maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
 			</properties>
 			<build>
 				<plugins>
