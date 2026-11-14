@@ -137,7 +137,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -294,7 +293,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
@@ -442,7 +440,6 @@
 							</execution>
 						</executions>
 					</plugin>
-
 				</plugins>
 			</build>
 		</profile>
